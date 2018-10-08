@@ -1,0 +1,50 @@
+{
+  "name": "perpetual",
+  "version": "1.0.0",
+  "description": "Lightweight version of immutable-js",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "yarn test --watchAll",
+    "dev": "webpack-dev-server --env.mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/overstock/perpetual-js.git"
+  },
+  "keywords": [
+    "immutable",
+    "persistent",
+    "data",
+    "functional",
+    "collection",
+    "iteration"
+  ],
+  "author": "Kevin Jenson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/overstock/perpetual-js/issues"
+  },
+  "homepage": "https://github.com/overstock/perpetual-js#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-jest": "^23.6.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^5.6.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "jest": "^23.6.0",
+    "path": "^0.12.7",
+    "regenerator-runtime": "^0.12.1",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.js?$": "babel-jest"
+    }
+  },
+  "dependencies": {
+    "babel-loader": "7"
+  }
+}
