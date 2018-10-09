@@ -12,5 +12,7 @@ module.exports = {
         "arrow-body-style": 0,
         "comma-dangle": [2, 'only-multiline'],
         "eqeqeq": 0,
+        "implicit-arrow-linebreak": 0,
+        "no-param-reassign": 0,
     }
 };

@@ -53,13 +53,4 @@ describe('functions', () => {
       expect(functions.objectToArray(obj)).toEqual(array);
     });
   });
-
-  test('createRoot creates root object on map with entries', () => {
-    const entries = [['test1', 'testing1'], ['test2', 'testing2']];
-    const obj = {
-      entries,
-    };
-
-    expect(functions.createRoot(entries)).toEqual(obj);
-  });
 });

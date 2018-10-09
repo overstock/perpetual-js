@@ -1,4 +1,4 @@
-import * as Map from '../Map';
+import * as Map from '../index';
 
 describe('Map', () => {
   test('emptyMap to return empty Map', () => {
@@ -22,14 +22,30 @@ describe('Map', () => {
   });
 
   describe('createNewMap', () => {
-    test('if typeof is not object returns undefined', () => {
-      const value = () => {};
-      expect(Map.createNewMap(value)).toEqual(undefined);
+    test('if typeof value is not object, throws error', () => {
+      expect(Map.createNewMap).toThrow(Error);
     });
 
     test('return Map if isArray', () => {
       const value = [['test', 'test']];
       expect(Map.createNewMap(value)).toMatchSnapshot();
+    });
+
+    test('returns Map if is Object', () => {
+      const value = { test: 'test' };
+      expect(Map.createNewMap(value)).toMatchSnapshot();
+    });
+  });
+
+  describe('Mep', () => {
+    const value = { test: 'test' };
+
+    test('returns empty map with empty value', () => {
+      expect(Map.default()).toMatchSnapshot();
+    });
+
+    test('returns new Map with value', () => {
+      expect(Map.default(value)).toMatchSnapshot();
     });
   });
 });

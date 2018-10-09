@@ -6,7 +6,9 @@
   "scripts": {
     "test": "jest",
     "test:watch": "yarn test --watchAll",
-    "dev": "webpack-dev-server --env.mode development"
+    "dev": "webpack-dev-server --env.mode development",
+    "build": "webpack --env.mode production",
+    "build:analyze": "yarn build --env.presets analyze"
   },
   "repository": {
     "type": "git",
@@ -36,10 +38,13 @@
     "eslint-plugin-import": "^2.14.0",
     "jest": "^23.6.0",
     "path": "^0.12.7",
+    "react-dev-utils": "^6.0.4",
     "regenerator-runtime": "^0.12.1",
     "webpack": "^4.20.2",
+    "webpack-bundle-analyzer": "^3.0.2",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.9"
+    "webpack-dev-server": "^3.1.9",
+    "webpack-merge": "^4.1.4"
   },
   "jest": {
     "transform": {
