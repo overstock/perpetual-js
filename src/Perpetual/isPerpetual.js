@@ -1,4 +1,4 @@
-import { isMap } from '../_methods';
+import { isMap, isList } from '../_methods';
 
 const isPerpetual = maybePerpetual =>
   Boolean(maybePerpetual && (isMap(maybePerpetual) || isList(maybePerpetual)));

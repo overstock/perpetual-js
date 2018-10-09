@@ -18,7 +18,7 @@ describe('Map', () => {
       altered: false,
     };
 
-    expect(Map.makeEmptyMap(0)).toEqual(map);
+    expect(Map.makeMap(0)).toEqual(map);
   });
 
   describe('createNewMap', () => {
