@@ -1,6 +1,14 @@
 import toMethod from './toMethod';
 import { IS_MAP_SYMBOL } from '../_methods/isMap';
-import { isMap, getIn } from '../_methods';
+import {
+  isMap,
+  getIn,
+  remove,
+  removeIn,
+  setIn,
+  update,
+  updateIn,
+} from '../_methods';
 import {
   freeze, isObject, objectToArray,
 } from './functions/functions';
@@ -39,6 +47,12 @@ Map.isMap = isMap;
 const MapPrototype = Map.prototype;
 MapPrototype[IS_MAP_SYMBOL] = true;
 MapPrototype.getIn = toMethod(getIn);
+MapPrototype.delete = toMethod(remove);
+MapPrototype.deleteIn = toMethod(removeIn);
+MapPrototype.setIn = toMethod(setIn);
+MapPrototype.update = toMethod(update);
+MapPrototype.updateIn = toMethod(updateIn);
+
 
 class ArrayMapNode {
   constructor(entries) {
