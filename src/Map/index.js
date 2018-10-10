@@ -1,5 +1,6 @@
-import toMethod from './toMethod';
+import { is, toMethod } from '../Perpetual';
 import { IS_MAP_SYMBOL } from '../_methods/isMap';
+import { NOT_SET, makeRef, setRef } from '../_methods/utils/TrieUtils';
 import {
   isMap,
   getIn,
@@ -12,13 +13,14 @@ import {
   merge,
   mergeDeep,
   mergeIn,
+  mergeDeepIn,
 } from '../_methods';
 import {
-  freeze, isObject, objectToArray,
-} from './functions/functions';
-import { is } from '../Perpetual';
-import { arrCopy } from '../_methods/utils';
-import { NOT_SET, makeRef, setRef } from '../_methods/utils/TrieUtils';
+  arrCopy,
+  freeze,
+  objectToArray,
+  isPlainObject,
+} from '../_methods/utils';
 
 class Map {
   constructor(value) {
@@ -62,6 +64,7 @@ MapPrototype.update = toMethod(update);
 MapPrototype.updateIn = toMethod(updateIn);
 MapPrototype.merge = toMethod(merge);
 MapPrototype.mergeDeep = toMethod(mergeDeep);
+MapPrototype.mergeDeepIn = toMethod(mergeDeepIn);
 MapPrototype.mergeIn = toMethod(mergeIn);
 MapPrototype.withMutations = withMutations;
 
@@ -126,7 +129,7 @@ const makeMap = (size, root) => {
 };
 
 const createNewMap = value => {
-  if (!isObject(value)) {
+  if (!isPlainObject(value)) {
     throw new Error('expected value of type object or array');
   }
 
