@@ -14,5 +14,6 @@ module.exports = {
         "eqeqeq": 0,
         "implicit-arrow-linebreak": 0,
         "no-param-reassign": 0,
+        "import/no-cycle": 1,
     }
 };

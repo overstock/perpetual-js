@@ -10,6 +10,8 @@ import {
   updateIn,
   withMutations,
   merge,
+  mergeDeep,
+  mergeIn,
 } from '../_methods';
 import {
   freeze, isObject, objectToArray,
@@ -59,6 +61,8 @@ MapPrototype.setIn = toMethod(setIn);
 MapPrototype.update = toMethod(update);
 MapPrototype.updateIn = toMethod(updateIn);
 MapPrototype.merge = toMethod(merge);
+MapPrototype.mergeDeep = toMethod(mergeDeep);
+MapPrototype.mergeIn = toMethod(mergeIn);
 MapPrototype.withMutations = withMutations;
 
 class ArrayMapNode {

@@ -7,6 +7,7 @@ const isValueObject = maybeValue =>
 
 const is = (valueA, valueB) => {
   if (!valueA || !valueB) return false;
+  // eslint-disable-next-line
   if (valueA === valueB || (valueA !== valueA && valueB !== valueB)) return true;
   if (
     typeof valueA.valueOf === 'function'
@@ -17,6 +18,7 @@ const is = (valueA, valueB) => {
     if (!valueA || !valueB) return false;
     if (
       valueA === valueB
+      // eslint-disable-next-line
       || (valueA !== valueA && valueB !== valueB)
     ) return true;
   }

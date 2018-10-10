@@ -5,6 +5,10 @@ export { default as hasIn } from './hasIn';
 export { default as isList } from './isList';
 export { default as isMap } from './isMap';
 export { default as merge } from './merge';
+export { default as mergeDeep } from './mergeDeep';
+export { default as mergeDeepIn } from './mergeDeepIn';
+// eslint-disable-next-line
+export { default as mergeIn } from './mergeIn';
 export { default as remove } from './remove';
 export { default as removeIn } from './removeIn';
 export { default as set } from './set';
