@@ -8,6 +8,8 @@ import {
   setIn,
   update,
   updateIn,
+  withMutations,
+  merge,
 } from '../_methods';
 import {
   freeze, isObject, objectToArray,
@@ -40,6 +42,10 @@ class Map {
   remove(key) {
     return updateMap(this, key, NOT_SET);
   }
+
+  reduce(fn, t) {
+    return this.root ? this.root.reduce(fn, t) : NOT_SET;
+  }
 }
 
 Map.isMap = isMap;
@@ -52,7 +58,8 @@ MapPrototype.deleteIn = toMethod(removeIn);
 MapPrototype.setIn = toMethod(setIn);
 MapPrototype.update = toMethod(update);
 MapPrototype.updateIn = toMethod(updateIn);
-
+MapPrototype.merge = toMethod(merge);
+MapPrototype.withMutations = withMutations;
 
 class ArrayMapNode {
   constructor(entries) {
@@ -92,6 +99,11 @@ class ArrayMapNode {
     } else newEntries.push([key, value]);
 
     return new ArrayMapNode(newEntries);
+  }
+
+  reduce(fn, t) {
+    const { entries } = this;
+    return Array.isArray(entries) ? entries.reduce(fn, t) : NOT_SET;
   }
 }
 
@@ -140,5 +152,5 @@ const updateMap = (map, key, value) => {
 const Mep = value => new Map(value);
 
 export {
-  Mep as default, emptyMap, makeMap, createNewMap,
+  Mep as default, emptyMap, makeMap, createNewMap, ArrayMapNode,
 };

@@ -1,5 +1,5 @@
 function toMethod(func) {
-  return function (...args) {
+  return function method(...args) {
     return func(this, ...args);
   };
 }
