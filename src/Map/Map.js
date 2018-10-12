@@ -1,6 +1,6 @@
-import { isMap } from '../_methods';
+import { isMap } from '../Perpetual';
 import { NOT_SET, setRef, makeRef } from '../_methods/utils/TrieUtils';
-import { IS_MAP_SYMBOL } from '../_methods/isMap';
+import { IS_MAP_SYMBOL } from '../Perpetual/isMap';
 import {
   arrCopy,
   freeze,

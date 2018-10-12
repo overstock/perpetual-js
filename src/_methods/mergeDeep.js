@@ -1,5 +1,4 @@
 import Map from '../Map/Map';
-import { isPerpetual } from '../Perpetual';
 import { isDataStructure } from './utils';
 
 let merged;
@@ -7,12 +6,9 @@ const mergeDeep = (collection, ...sources) => {
   if (!isDataStructure(collection)) {
     throw new TypeError(`Cannot merge into non-data-structure value: ${collection}`);
   }
-  let mergedFunc;
   const isArray = Array.isArray(collection);
-  if (!isPerpetual(collection)) {
-    merged = isArray ? collection : new Map(collection);
-    mergedFunc = isArray ? mergeList : mergeMap;
-  }
+  const mergedFunc = isArray ? mergeList : mergeMap;
+  merged = isArray ? collection : new Map(collection);
   sources.forEach(mergedFunc);
   return merged;
 };
@@ -39,4 +35,4 @@ const mergeList = source => {
   }, source);
 };
 
-export default mergeDeep;
+export { mergeDeep as default, mergeMap, mergeList };

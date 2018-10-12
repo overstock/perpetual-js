@@ -1,13 +1,11 @@
 import List, { ListPrototype } from './List';
-import { IS_LIST_SYMBOL } from '../_methods/isList';
-import { toMethod } from '../Perpetual';
+import { IS_LIST_SYMBOL } from '../Perpetual/isList';
 import {
   clear,
   deLete,
   getIn,
   includes,
   insert,
-  isList,
   merge,
   mergeDeepIn,
   mergeIn,
@@ -16,13 +14,12 @@ import {
   setIn,
   shift,
   splice,
+  toMethod,
   unshift,
   update,
   updateIn,
   withMutations,
 } from '../_methods';
-
-List.isList = isList;
 
 ListPrototype[IS_LIST_SYMBOL] = true;
 ListPrototype.splice = toMethod(splice);

@@ -1,11 +1,11 @@
 import Map, { MapPrototype } from './Map';
-import { toMethod } from '../Perpetual';
 import {
   getIn,
   hasIn,
   remove,
   removeIn,
   setIn,
+  toMethod,
   update,
   updateIn,
   withMutations,

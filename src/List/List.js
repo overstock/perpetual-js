@@ -1,4 +1,4 @@
-import { isList } from '../_methods';
+import { isList } from '../Perpetual';
 import {
   SIZE, makeRef, setRef, NOT_SET,
 } from '../_methods/utils/TrieUtils';
@@ -43,6 +43,8 @@ class List {
     return this.tail ? this.tail.reduce(fn, t) : NOT_SET;
   }
 }
+
+List.isList = isList;
 
 const ListPrototype = List.prototype;
 

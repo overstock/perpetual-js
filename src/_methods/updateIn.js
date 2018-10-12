@@ -46,11 +46,16 @@ const updateInDeeply = (inPerpetual, collection, keyPath, index, notSetValue, up
 
   if (nextUpdated === nextExisting) return collection;
   if (nextUpdated === NOT_SET) return remove(collection, key);
+  let collec;
+  if (wasNotSet) {
+    if (inPerpetual) collec = emptyMap();
+    else collec = {};
+  } else collec = collection;
   return set(
-    wasNotSet ? (inPerpetual ? emptyMap() : {}) : collection,
+    collec,
     key,
     nextUpdated
   );
 };
 
-export default updateIn;
+export { updateIn as default, updateInDeeply };

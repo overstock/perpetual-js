@@ -3,7 +3,7 @@ import isPlainObject from './isPlainObject';
 
 const isDataStructure = value => (
   typeof value === 'object'
-  && (isPerpetual(value) || Array.isArray || isPlainObject(value))
+  && (isPerpetual(value) || Array.isArray(value) || isPlainObject(value))
 );
 
 export default isDataStructure;
