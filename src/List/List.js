@@ -1,4 +1,5 @@
 import { isList } from '../Perpetual';
+import { IS_LIST_SYMBOL } from '../Perpetual/isList';
 import {
   SIZE, makeRef, setRef, NOT_SET,
 } from '../_methods/utils/TrieUtils';
@@ -47,6 +48,7 @@ class List {
 List.isList = isList;
 
 const ListPrototype = List.prototype;
+ListPrototype[IS_LIST_SYMBOL] = true;
 
 class VNode {
   constructor(array) {
@@ -87,7 +89,7 @@ const updateList = (list, index, value) => {
   const { size } = list;
   const didAlter = makeRef();
   const newTail = createNewTail(list, index, value, didAlter);
-  const newSize = size === newTail.length ? size : newTail.length;
+  const newSize = newTail ? newTail.length : size;
   if (!didAlter.value) return list;
   return makeList(newSize, new VNode(newTail));
 };

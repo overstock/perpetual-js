@@ -18,6 +18,7 @@ export { default as set } from './set';
 export { default as setIn } from './setIn';
 export { default as shift } from './shift';
 export { default as splice } from './splice';
+export { default as toJS } from './toJS';
 export { default as toMethod } from './toMethod';
 export { default as unshift } from './unshift';
 export { default as update } from './update';

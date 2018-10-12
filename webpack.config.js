@@ -12,11 +12,11 @@ module.exports = ({ mode, presets } = { mode: 'development', presets: [] }) =>
     module: {
       strictExportPresence: true,
       rules: [
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          loader: 'babel-loader',
-        },
+        // {
+        //   test: /\.js$/,
+        //   exclude: /node_modules/,
+        //   loader: 'babel-loader',
+        // },
       ],
     },
     output: {
