@@ -1,6 +1,7 @@
 export { default as arrCopy } from './arrCopy';
 export { default as freeze } from './freeze';
 export { default as hasOwnProperty } from './hasOwnProperty';
+export { default as is } from './is';
 export { default as isDataStructure } from './isDataStructure';
 export { default as isPlainObject } from './isPlainObject';
 export { default as objectToArray } from './objectToArray';

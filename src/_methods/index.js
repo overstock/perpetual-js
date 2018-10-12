@@ -1,19 +1,26 @@
+export { default as clear } from './clear';
+export { default as deLete } from './delete';
 export { default as get } from './get';
 export { default as getIn } from './getIn';
 export { default as has } from './has';
 export { default as hasIn } from './hasIn';
+export { default as includes } from './includes';
+export { default as insert } from './insert';
 export { default as isList } from './isList';
 export { default as isMap } from './isMap';
 export { default as merge } from './merge';
 export { default as mergeDeep } from './mergeDeep';
 export { default as mergeDeepIn } from './mergeDeepIn';
-// eslint-disable-next-line
 export { default as mergeIn } from './mergeIn';
+export { default as pop } from './pop';
+export { default as push } from './push';
 export { default as remove } from './remove';
 export { default as removeIn } from './removeIn';
 export { default as set } from './set';
 export { default as setIn } from './setIn';
+export { default as shift } from './shift';
+export { default as splice } from './splice';
+export { default as unshift } from './unshift';
 export { default as update } from './update';
-// eslint-disable-next-line
 export { default as updateIn } from './updateIn';
 export { default as withMutations } from './withMutations';

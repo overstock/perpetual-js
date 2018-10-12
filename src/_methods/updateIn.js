@@ -1,7 +1,7 @@
 import { isPerpetual } from '../Perpetual';
 import { isDataStructure, quoteString } from './utils';
 import { NOT_SET } from './utils/TrieUtils';
-import { emptyMap } from '../Map';
+import { emptyMap } from '../Map/Map';
 import get from './get';
 import remove from './remove';
 import set from './set';
