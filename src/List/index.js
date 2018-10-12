@@ -3,6 +3,7 @@ import {
   clear,
   deLete,
   getIn,
+  hashCode,
   includes,
   insert,
   merge,
@@ -25,6 +26,7 @@ ListPrototype.clear = clear;
 ListPrototype.concat = toMethod(merge);
 ListPrototype.delete = toMethod(deLete);
 ListPrototype.getIn = toMethod(getIn);
+ListPrototype.hashCode = toMethod(hashCode);
 ListPrototype.includes = toMethod(includes);
 ListPrototype.insert = toMethod(insert);
 ListPrototype.merge = toMethod(merge);

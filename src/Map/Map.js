@@ -1,10 +1,10 @@
 import { isMap } from '../Perpetual';
+import is from '../is';
 import { NOT_SET, setRef, makeRef } from '../_methods/utils/TrieUtils';
 import { IS_MAP_SYMBOL } from '../Perpetual/isMap';
 import {
   arrCopy,
   freeze,
-  is,
   isPlainObject,
   objectToArray,
 } from '../_methods/utils';
@@ -94,11 +94,12 @@ const emptyMap = () => {
   return EMPTY_MAP;
 };
 
-const makeMap = (size, root) => {
+const makeMap = (size, root, hashCode) => {
   const map = Object.create(MapPrototype);
   map.size = size;
   map.root = root;
   map.altered = false;
+  map._hashCode = hashCode;
   return freeze(map);
 };
 
@@ -112,6 +113,7 @@ const createNewMap = value => {
   map.size = entries.length;
   map.root = new ArrayMapNode(entries);
   map.altered = false;
+  map._hashCode = undefined;
   return map;
 };
 

@@ -3,6 +3,7 @@ export { default as deLete } from './delete';
 export { default as get } from './get';
 export { default as getIn } from './getIn';
 export { default as has } from './has';
+export { default as hashCode } from './hashCode';
 export { default as hasIn } from './hasIn';
 export { default as includes } from './includes';
 export { default as insert } from './insert';

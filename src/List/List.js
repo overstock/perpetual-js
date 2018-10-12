@@ -75,11 +75,12 @@ const emptyList = () => {
   return EMPTY_LIST;
 };
 
-const makeList = (size, tail) => {
+const makeList = (size, tail, hashCode) => {
   const list = Object.create(ListPrototype);
   list.size = size;
   list.tail = tail;
   list.altered = false;
+  list._hashCode = hashCode;
   return list;
 };
 
