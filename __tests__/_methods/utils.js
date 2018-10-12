@@ -1,5 +1,6 @@
 import * as utils from '../../src/_methods/utils';
 import Map from '../../src/Map';
+import List from '../../src/List';
 
 describe('utils', () => {
   test('arrCopy returns copy of array when passed arr', () => {
@@ -24,12 +25,52 @@ describe('utils', () => {
     expect(falseResult).toBeFalsy();
   });
 
-  // describe('is', () => {
-  //   test('array equals array', () => {
-  //     const obj = { test: 'test' };
-  //     const map1 = Map(obj);
-  //     const map2 = Map(obj);
-  //     expect(utils.is(map1, map2)).toBeTruthy();
-  //   });
-  // });
+  describe('isDataStructure', () => {
+    const { isDataStructure } = utils;
+
+    test('returns true is value is object', () => {
+      expect(isDataStructure({})).toBeTruthy();
+    });
+
+    test('returns true if is array', () => {
+      expect(isDataStructure([])).toBeTruthy();
+    });
+
+    test('return true if is List', () => {
+      expect(isDataStructure(List())).toBeTruthy();
+    });
+
+    test('returns true if is Map', () => {
+      expect(isDataStructure(Map())).toBeTruthy();
+    });
+
+    test('returns false if is not a data-structure', () => {
+      expect(isDataStructure(654)).toBeFalsy();
+      expect(isDataStructure('string')).toBeFalsy();
+      expect(isDataStructure(false)).toBeFalsy();
+      expect(isDataStructure(true)).toBeFalsy();
+      expect(isDataStructure(undefined)).toBeFalsy();
+      expect(isDataStructure(null)).toBeFalsy();
+    });
+  });
+
+  describe('isPlainObject', () => {
+    const { isPlainObject } = utils;
+
+    test('returns true if is object', () => {
+      expect(isPlainObject({})).toBeTruthy();
+    });
+
+    test('returns false if is not object', () => {
+      expect(isPlainObject([])).toBeFalsy();
+      expect(isPlainObject(Map())).toBeFalsy();
+      expect(isPlainObject(List())).toBeFalsy();
+      expect(isPlainObject(654)).toBeFalsy();
+      expect(isPlainObject('string')).toBeFalsy();
+      expect(isPlainObject(false)).toBeFalsy();
+      expect(isPlainObject(true)).toBeFalsy();
+      expect(isPlainObject(undefined)).toBeFalsy();
+      expect(isPlainObject(null)).toBeFalsy();
+    });
+  });
 });

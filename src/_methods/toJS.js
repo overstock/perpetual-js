@@ -2,21 +2,16 @@ import { isPerpetual, isMap, isList } from '../Perpetual';
 
 const toJS = collection => {
   if (!collection || typeof collection !== 'object' || !isPerpetual(collection)) return collection;
-  let result;
-  if (isMap(collection)) {
-    result = reduceMap(collection);
-  } else if (isList(collection)) {
-    result = reduceList(collection);
-  }
-  return result;
+  if (isMap(collection)) return reduceMap(collection);
+  if (isList(collection)) return reduceList(collection);
+  return collection;
 };
 
 const reduceMap = collection => {
   return collection.reduce((total, [key, value]) => {
     if (isMap(value)) value = reduceMap(value);
     else if (isList(value) || Array.isArray(value)) value = reduceList(value);
-    const result = { ...total, [key]: value };
-    return result;
+    return { ...total, [key]: value };
   }, {});
 };
 
@@ -24,8 +19,7 @@ const reduceList = collection => {
   return collection.reduce((total, value) => {
     if (isList(value) || Array.isArray(value)) value = reduceList(value);
     else if (isMap(value)) value = reduceMap(value);
-    const result = [...total, value];
-    return result;
+    return [...total, value];
   }, []);
 };
 
