@@ -1,4 +1,5 @@
 import * as utils from '../../src/_methods/utils';
+import * as trieUtils from '../../src/_methods/utils/TrieUtils';
 import Map from '../../src/Map';
 import List from '../../src/List';
 
@@ -71,6 +72,88 @@ describe('utils', () => {
       expect(isPlainObject(true)).toBeFalsy();
       expect(isPlainObject(undefined)).toBeFalsy();
       expect(isPlainObject(null)).toBeFalsy();
+    });
+  });
+
+  describe('objectToArray', () => {
+    const { objectToArray } = utils;
+    const obj = {
+      x: 'x',
+      y: 'y',
+      z: 'z',
+    };
+
+    test('returns array of arrays with key value pairs', () => {
+      const arr = [['x', 'x'], ['y', 'y'], ['z', 'z']];
+      const wrongArr = [['x', 'y'], ['y', 'z'], ['z', 'x']];
+
+      expect(objectToArray(obj)).toEqual(arr);
+      expect(objectToArray(obj)).not.toEqual(wrongArr);
+    });
+
+    test('returns array if passed array', () => {
+      const arr = ['value', 'difValue'];
+      expect(objectToArray(arr)).toBe(arr);
+    });
+
+    test('returns frozen arr', () => {
+      expect(Object.isFrozen(objectToArray(obj))).toBeTruthy();
+    });
+  });
+
+  test('quoteString returns value as string', () => {
+    const { quoteString } = utils;
+    const isString = expect.any(String);
+
+    expect(quoteString({ x: 'x' })).toEqual(isString);
+    expect(quoteString(['value'])).toEqual(isString);
+    expect(quoteString(7890)).toEqual(isString);
+    expect(quoteString('value')).toEqual(isString);
+    expect(quoteString(null)).toEqual(isString);
+    expect(quoteString(undefined)).toEqual(isString);
+  });
+
+  describe('shallowCopy', () => {
+    const { shallowCopy } = utils;
+
+    test('returns copy of object', () => {
+      const obj = { test: 'test' };
+      expect(shallowCopy(obj)).toEqual(obj);
+      expect(shallowCopy(obj)).not.toBe(obj);
+    });
+
+    test('returns copy of array', () => {
+      const arr = ['x', 'y', 'z'];
+      expect(shallowCopy(arr)).toEqual(arr);
+      expect(shallowCopy(arr)).not.toBe(arr);
+    });
+  });
+
+  describe('TrieUtils', () => {
+    test('NOT_SET should be empty object', () => {
+      expect(trieUtils.NOT_SET).toEqual({});
+      expect(Object.keys(trieUtils.NOT_SET)).toHaveLength(0);
+    });
+
+    test('Shift should be 5', () => {
+      expect(trieUtils.SHIFT).toEqual(5);
+    });
+
+    test('SIZE should be 32', () => {
+      expect(trieUtils.SIZE).toEqual(32);
+    });
+
+    const ref = trieUtils.makeRef();
+    test('makeRef should return { value: false }', () => {
+      expect(ref).toEqual({ value: false });
+      expect(ref.value).toBe(false);
+    });
+
+    test('setRef should change ref.value to true', () => {
+      expect(ref.value).toBe(false);
+      trieUtils.setRef(ref);
+      expect(ref).toEqual({ value: true });
+      expect(ref.value).toBe(true);
     });
   });
 });
