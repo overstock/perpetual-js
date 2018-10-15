@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`_methods clear returns empty List 1`] = `
+List {
+  "_hashCode": undefined,
+  "altered": false,
+  "size": 0,
+  "tail": undefined,
+}
+`;
