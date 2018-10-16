@@ -23,7 +23,7 @@ class List {
 
   has(index) {
     if (typeof index !== 'number') return;
-    if (index < 0 || index > this.size) return false;
+    if (index < 0 || index >= this.size) return false;
     return true;
   }
 
