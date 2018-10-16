@@ -252,4 +252,88 @@ describe('_methods', () => {
       });
     });
   });
+
+  describe('hasIn', () => {
+    describe('List', () => {
+      const list = new List([1, 2, 3, [1, 2, 3, [1, 2, 3]]]);
+
+      test('returns true if list has nested index', () => {
+        expect(methods.hasIn(list, [0])).toBe(true);
+        expect(methods.hasIn(list, [3, 0])).toBe(true);
+        expect(methods.hasIn(list, [3, 3, 2])).toBe(true);
+      });
+
+      test('returns false if does not have nested index', () => {
+        expect(methods.hasIn(list, [4])).toBe(false);
+        expect(methods.hasIn(list, [3, 4])).toBe(false);
+        expect(methods.hasIn(list, [3, 3, 4])).toBe(false);
+      });
+    });
+
+    describe('Map', () => {
+      const map = new Map({
+        x: 'y',
+        z: {
+          x: 'y',
+          z: {
+            x: 'y',
+            z: 'a'
+          }
+        }
+      });
+
+      test('returns true if map has nested value', () => {
+        expect(methods.hasIn(map, ['x'])).toBe(true);
+        expect(methods.hasIn(map, ['z', 'x'])).toBe(true);
+        expect(methods.hasIn(map, ['z', 'z', 'x'])).toBe(true);
+      });
+
+      test('returns false if does not have nested value', () => {
+        expect(methods.hasIn(map, ['y'])).toBe(false);
+        expect(methods.hasIn(map, ['z', 'y'])).toBe(false);
+        expect(methods.hasIn(map, ['z', 'z', 'y'])).toBe(false);
+      });
+    });
+  });
+
+  describe('includes', () => {
+    const list = new List([1, 'value', 3, 'apple', 5, 'string']);
+
+    test('returns true if value is included', () => {
+      expect(methods.includes(list, 'value')).toBe(true);
+      expect(methods.includes(list, 3)).toBe(true);
+      expect(methods.includes(list, 'string')).toBe(true);
+    });
+
+    test('returns false if value does not exist', () => {
+      expect(methods.includes(list, 'none')).toBe(false);
+      expect(methods.includes(list, 2)).toBe(false);
+      expect(methods.includes(list, 'pear')).toBe(false);
+    });
+  });
+
+  describe('insert', () => {
+    const list = new List([1, 2, 3, 4, 5]);
+    const list1 = methods.insert(list, 0, 'value');
+    const list2 = methods.insert(list, 2, 'string');
+    const list3 = methods.insert(list1, 3, 'apple');
+
+    test('returns new List with inserted value', () => {
+      expect(list1).toBeInstanceOf(List);
+      expect(list1.get(0)).toEqual('value');
+      expect(list2).toBeInstanceOf(List);
+      expect(list2.get(0)).toEqual(1);
+      expect(list2.get(2)).toEqual('string');
+      expect(list3).toBeInstanceOf(List);
+      expect(list3.get(0)).toEqual('value');
+      expect(list3.get(3)).toEqual('apple');
+    });
+
+    test('increases size value correctly', () => {
+      expect(list.size).toBe(5);
+      expect(list1.size).toBe(6);
+      expect(list2.size).toBe(6);
+      expect(list3.size).toBe(7);
+    });
+  });
 });
