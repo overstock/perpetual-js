@@ -336,4 +336,166 @@ describe('_methods', () => {
       expect(list3.size).toBe(7);
     });
   });
+
+  describe('merge', () => {
+    describe('Map', () => {
+      const map1 = new Map({ x: 'x', y: 'y', z: 'a' });
+      const map2 = new Map({ x: 'z', y: 'x', a: 'a' });
+      const mapObj = new Map({ b: { x: 'x' } });
+      const mapArr = new Map({ c: [1, 2, 3] });
+      const mapList = new Map({ d: new List([1, 2, 3]) });
+      const mapMap = new Map({ e: new Map({ x: 'x' }) });
+      Map.prototype.withMutations = methods.withMutations;
+
+      const newMap = methods.merge(map1, map2);
+      const mergedMap = methods.merge(map1, map2, mapObj, mapArr, mapList, mapMap);
+
+      test('returns new map with correct size', () => {
+        expect(newMap).toBeInstanceOf(Map);
+        expect(newMap.size).toBe(4);
+      });
+
+      test('should have properties x, y, z, a, b', () => {
+        expect(newMap.has('x')).toBe(true);
+        expect(newMap.has('y')).toBe(true);
+        expect(newMap.has('z')).toBe(true);
+        expect(newMap.has('a')).toBe(true);
+      });
+
+      test('should have {x: z, y: x, z: a, a: a}', () => {
+        expect(newMap.get('x')).toEqual('z');
+        expect(newMap.get('y')).toEqual('x');
+        expect(newMap.get('z')).toEqual('a');
+        expect(newMap.get('a')).toEqual('a');
+      });
+
+      test('can merge multiple maps at a time', () => {
+        expect(mergedMap).toBeInstanceOf(Map);
+        expect(mergedMap.size).toBe(8);
+      });
+
+      test('has properties: a, b, c, d, x, y, z', () => {
+        expect(mergedMap.has('x')).toBe(true);
+        expect(mergedMap.has('y')).toBe(true);
+        expect(mergedMap.has('z')).toBe(true);
+        expect(mergedMap.has('a')).toBe(true);
+        expect(mergedMap.has('b')).toBe(true);
+        expect(mergedMap.has('c')).toBe(true);
+        expect(mergedMap.has('d')).toBe(true);
+        expect(mergedMap.has('e')).toBe(true);
+      });
+
+      test('returns correct values', () => {
+        expect(mergedMap.get('x')).toEqual('z');
+        expect(mergedMap.get('y')).toEqual('x');
+        expect(mergedMap.get('z')).toEqual('a');
+        expect(mergedMap.get('a')).toEqual('a');
+        expect(mergedMap.get('b')).toEqual({ x: 'x' });
+        expect(mergedMap.get('c')).toEqual([1, 2, 3]);
+        expect(mergedMap.get('d')).toEqual(new List([1, 2, 3]));
+        expect(mergedMap.get('e')).toEqual(new Map({ x: 'x' }));
+      });
+
+      test('can merge an object', () => {
+        const mergedObj = methods.merge(map1, { a: 'x', b: 'y' });
+        expect(mergedObj).toBeInstanceOf(Map);
+        expect(mergedObj.size).toBe(5);
+        expect(mergedObj.has('a')).toBe(true);
+        expect(mergedObj.has('b')).toBe(true);
+        expect(mergedObj.get('a')).toEqual('x');
+        expect(mergedObj.get('b')).toEqual('y');
+      });
+
+      test('throws type error if attempted merge with array', () => {
+        expect(() => {
+          methods.merge(map1, [1, 2, 3, 4]);
+        }).toThrow(TypeError);
+      });
+    });
+
+    describe('List', () => {
+      const list1 = new List([1, 2, 3]);
+      const list2 = new List([4, 5, 6]);
+      const listObj = new List([{ x: 'x' }]);
+      const listArr = new List([[1, 2, 3]]);
+      const listMap = new List([new Map({ x: 'x' })]);
+      const listList = new List([new List([1, 2, 3])]);
+      List.prototype.withMutations = methods.withMutations;
+
+      const newList = methods.merge(list1, list2);
+      const mergedList = methods.merge(list1, list2, listObj, listArr, listMap, listList);
+
+      test('returns new list with correct size', () => {
+        expect(newList).toBeInstanceOf(List);
+        expect(newList.size).toBe(6);
+      });
+
+      test('has all correct indexes', () => {
+        expect(newList.has(0)).toBe(true);
+        expect(newList.has(1)).toBe(true);
+        expect(newList.has(2)).toBe(true);
+        expect(newList.has(3)).toBe(true);
+        expect(newList.has(4)).toBe(true);
+        expect(newList.has(5)).toBe(true);
+      });
+
+      test('returns correct value', () => {
+        expect(newList.get(0)).toBe(1);
+        expect(newList.get(1)).toBe(2);
+        expect(newList.get(2)).toBe(3);
+        expect(newList.get(3)).toBe(4);
+        expect(newList.get(4)).toBe(5);
+        expect(newList.get(5)).toBe(6);
+      });
+
+      test('can merge multiple lists at a time', () => {
+        expect(mergedList).toBeInstanceOf(List);
+        expect(mergedList.size).toBe(10);
+      });
+
+      test('has all correct indexes', () => {
+        expect(mergedList.has(0)).toBe(true);
+        expect(mergedList.has(1)).toBe(true);
+        expect(mergedList.has(2)).toBe(true);
+        expect(mergedList.has(3)).toBe(true);
+        expect(mergedList.has(4)).toBe(true);
+        expect(mergedList.has(5)).toBe(true);
+        expect(mergedList.has(6)).toBe(true);
+        expect(mergedList.has(7)).toBe(true);
+        expect(mergedList.has(8)).toBe(true);
+        expect(mergedList.has(9)).toBe(true);
+      });
+
+      test('returns correct values', () => {
+        expect(mergedList.get(0)).toEqual(1);
+        expect(mergedList.get(1)).toEqual(2);
+        expect(mergedList.get(2)).toEqual(3);
+        expect(mergedList.get(3)).toEqual(4);
+        expect(mergedList.get(4)).toEqual(5);
+        expect(mergedList.get(5)).toEqual(6);
+        expect(mergedList.get(6)).toEqual({ x: 'x' });
+        expect(mergedList.get(7)).toEqual([1, 2, 3]);
+        expect(mergedList.get(8)).toEqual(new Map({ x: 'x' }));
+        expect(mergedList.get(9)).toEqual(new List([1, 2, 3]));
+      });
+
+      test('can merge array', () => {
+        const mergedArr = methods.merge(list1, [11, 12, 13]);
+        expect(mergedArr).toBeInstanceOf(List);
+        expect(mergedArr.size).toBe(6);
+        expect(mergedArr.has(3)).toBe(true);
+        expect(mergedArr.has(4)).toBe(true);
+        expect(mergedArr.has(5)).toBe(true);
+        expect(mergedArr.get(3)).toBe(11);
+        expect(mergedArr.get(4)).toBe(12);
+        expect(mergedArr.get(5)).toBe(13);
+      });
+
+      test('can merge object', () => {
+        const mergedObj = methods.merge(list1, { x: 'x', y: 'y' });
+        expect(mergedObj).toBeInstanceOf(List);
+        expect(mergedObj.size).toBe(4);
+      });
+    });
+  });
 });

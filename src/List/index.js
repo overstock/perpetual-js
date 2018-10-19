@@ -41,7 +41,7 @@ ListPrototype.toJS = toMethod(toJS);
 ListPrototype.unshift = toMethod(unshift);
 ListPrototype.update = toMethod(update);
 ListPrototype.updateIn = toMethod(updateIn);
-ListPrototype.withMutations = toMethod(withMutations);
+ListPrototype.withMutations = withMutations;
 
 const Lest = value => new List(value);
 
