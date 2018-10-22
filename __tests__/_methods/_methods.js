@@ -495,6 +495,40 @@ describe('_methods', () => {
         const mergedObj = methods.merge(list1, { x: 'x', y: 'y' });
         expect(mergedObj).toBeInstanceOf(List);
         expect(mergedObj.size).toBe(4);
+        expect(mergedObj.has(3)).toBe(true);
+        expect(mergedObj.get(3)).toEqual({ x: 'x', y: 'y' });
+      });
+    });
+
+    describe('Map and List', () => {
+      const map1 = new Map({ x: 'y', z: 'x' });
+      const map2 = new Map({ a: 'b', c: 'a' });
+      const list1 = new List([1, 2, 3, 4]);
+      const list2 = new List([5, 6, 7, 8]);
+
+      const merge1 = methods.merge(list1, map1);
+      const merge2 = methods.merge(list2, map2);
+      const merge3 = methods.merge(list1, map2, list2, map1);
+
+      test('cannot merge list onto map', () => {
+        expect(() => methods.merge(map1, list1)).toThrow(TypeError);
+        expect(() => methods.merge(map2, list2)).toThrow(TypeError);
+      });
+
+      test('Returns new List with correct size', () => {
+        expect(merge1).toBeInstanceOf(List);
+        expect(merge2).toBeInstanceOf(List);
+        expect(merge3).toBeInstanceOf(List);
+        expect(merge1.size).toBe(6);
+        expect(merge2.size).toBe(6);
+        expect(merge3.size).toBe(12);
+      });
+
+      test('merged Lists return correct values', () => {
+        expect(merge3.get(0)).toEqual(1);
+        expect(merge3.get(4)).toEqual(['a', 'b']);
+        expect(merge3.get(6)).toEqual(5);
+        expect(merge3.get(11)).toEqual(['z', 'x']);
       });
     });
   });
