@@ -11,6 +11,7 @@ import {
   mergeIn,
   pop,
   push,
+  removeIn,
   setIn,
   shift,
   splice,
@@ -25,6 +26,7 @@ import {
 ListPrototype.clear = clear;
 ListPrototype.concat = toMethod(merge);
 ListPrototype.delete = toMethod(deLete);
+ListPrototype.deleteIn = toMethod(removeIn);
 ListPrototype.getIn = toMethod(getIn);
 ListPrototype.hashCode = toMethod(hashCode);
 ListPrototype.includes = toMethod(includes);

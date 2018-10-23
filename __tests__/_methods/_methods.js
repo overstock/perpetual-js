@@ -532,4 +532,284 @@ describe('_methods', () => {
       });
     });
   });
+
+  describe('mergeDeep', () => {
+    const one = new Map({ a: new Map({ x: 10, y: 10 }), b: new Map({ x: 20, y: 50 }) });
+    const two = new Map({ a: new Map({ x: 2 }), b: new Map({ y: 5 }), c: new Map({ z: 3 }) });
+    Map.prototype.merge = methods.toMethod(methods.merge);
+    const merged = methods.mergeDeep(one, two);
+
+    test('merged returns new map with correct size', () => {
+      expect(merged).toBeInstanceOf(Map);
+      expect(merged.size).toBe(3);
+    });
+
+    test('values of two override values of one', () => {
+      expect(methods.getIn(merged, ['a', 'x'])).toEqual(2);
+      expect(methods.getIn(merged, ['b', 'y'])).toEqual(5);
+      expect(methods.getIn(merged, ['c', 'z'])).toEqual(3);
+    });
+
+    test('values in one that are not in two remain the same', () => {
+      expect(methods.getIn(merged, ['a', 'y'])).toEqual(10);
+      expect(methods.getIn(merged, ['b', 'x'])).toEqual(20);
+    });
+
+    const three = new Map({ a: { y: 44, z: 10 }, b: new Map({ x: new Map({ a: 420 }) }), c: new Map({ z: 3 }) });
+    const mergedTwo = methods.mergeDeep(one, three);
+
+    test('mergedTwo returns new map with correct size', () => {
+      expect(mergedTwo).toBeInstanceOf(Map);
+      expect(mergedTwo.size).toBe(3);
+    });
+
+    test('values of three override values of one', () => {
+      expect(methods.getIn(mergedTwo, ['a', 'y'])).toEqual(44);
+      expect(methods.getIn(mergedTwo, ['a', 'z'])).toEqual(10);
+      expect(methods.getIn(mergedTwo, ['b', 'x', 'a'])).toEqual(420);
+      expect(methods.getIn(mergedTwo, ['c', 'z'])).toEqual(3);
+    });
+
+    test('values in one that are not in two remain the same', () => {
+      expect(methods.getIn(mergedTwo, ['a', 'x'])).toEqual(10);
+      expect(methods.getIn(mergedTwo, ['b', 'y'])).toEqual(50);
+    });
+  });
+
+  describe('mergeDeepIn', () => {
+    describe('List', () => {
+      const list1 = new List([1, 2, { x: [3, { y: [4, { z: 'value' }] }] }]);
+      const list2 = new List([1, { z: 'string' }]);
+      const merged = methods.mergeDeepIn(list1, [2, 'x', 1, 'y'], list2);
+
+      test('merged returns new List with correct size', () => {
+        expect(merged).toBeInstanceOf(List);
+        expect(merged.size).toBe(3);
+      });
+
+      test('merges correct values', () => {
+        expect(methods.getIn(merged, [2, 'x', 1, 'y'])).toEqual([4, { z: 'value' }, 1, { z: 'string' }]);
+      });
+    });
+
+    describe('Map', () => {
+      const map1 = new Map({ x: [1, 2, new Map({ y: [{ z: 'value' }] })], b: 'b' });
+      const map2 = new Map({ a: { abc: 'abc' } });
+      const merged = methods.mergeDeepIn(map1, ['x', 2, 'y'], map2);
+
+      test('returns new Map with correct size', () => {
+        expect(merged).toBeInstanceOf(Map);
+        expect(merged.size).toBe(2);
+      });
+
+      test('merges correct values', () => {
+        expect(methods.getIn(merged, ['x', 2, 'y'])).toEqual([{ z: 'value' }, ['a', { abc: 'abc' }]]);
+      });
+    });
+  });
+
+  describe('mergeIn', () => {
+    describe('List', () => {
+      const list1 = new List([1, 2, { x: [3, { y: [4, { z: 'value' }] }] }]);
+      const list2 = new List([1, { z: 'string' }]);
+      const merged = methods.mergeIn(list1, [2, 'x', 1, 'y'], list2);
+
+      test('merged returns new List with correct size', () => {
+        expect(merged).toBeInstanceOf(List);
+        expect(merged.size).toBe(3);
+      });
+
+      test('merges correct values', () => {
+        expect(methods.getIn(merged, [2, 'x', 1, 'y'])).toEqual([4, { z: 'value' }, 1, { z: 'string' }]);
+      });
+    });
+
+    describe('Map', () => {
+      const map1 = new Map({ x: [1, 2, new Map({ y: [{ z: 'value' }] })], b: 'b' });
+      const map2 = new Map({ a: { abc: 'abc' } });
+      const merged = methods.mergeIn(map1, ['x', 2, 'y'], map2);
+
+      test('returns new Map with correct size', () => {
+        expect(merged).toBeInstanceOf(Map);
+        expect(merged.size).toBe(2);
+      });
+
+      test('merges correct values', () => {
+        expect(methods.getIn(merged, ['x', 2, 'y'])).toEqual([{ z: 'value' }, ['a', { abc: 'abc' }]]);
+      });
+    });
+  });
+
+  describe('pop', () => {
+    const list = new List([1, 2, 3, 4, 5]);
+    const list1 = methods.pop(list);
+    const list2 = methods.pop(list1);
+    const list3 = methods.pop(list2);
+    const list4 = methods.pop(list3);
+
+    test('returns new List with correct size', () => {
+      expect(list1).toBeInstanceOf(List);
+      expect(list2).toBeInstanceOf(List);
+      expect(list3).toBeInstanceOf(List);
+      expect(list4).toBeInstanceOf(List);
+      expect(list1.size).toBe(4);
+      expect(list2.size).toBe(3);
+      expect(list3.size).toBe(2);
+      expect(list4.size).toBe(1);
+    });
+
+    test('each list has correct values', () => {
+      expect(list.get(0)).toBe(1);
+      expect(list.get(1)).toBe(2);
+      expect(list.get(2)).toBe(3);
+      expect(list.get(3)).toBe(4);
+      expect(list.get(4)).toBe(5);
+      expect(list1.get(4)).toBe(undefined);
+      expect(list2.get(3)).toBe(undefined);
+      expect(list3.get(2)).toBe(undefined);
+      expect(list4.get(1)).toBe(undefined);
+    });
+  });
+
+  describe('push', () => {
+    const list = new List([0]);
+    const list1 = methods.push(list, 1);
+    const list2 = methods.push(list1, 2);
+
+    test('returns a new List with correct size', () => {
+      expect(list1).toBeInstanceOf(List);
+      expect(list2).toBeInstanceOf(List);
+      expect(list1.size).toBe(2);
+      expect(list2.size).toBe(3);
+    });
+
+    test('lists has correct values', () => {
+      expect(list.get(0)).toBe(0);
+      expect(list1.get(1)).toBe(1);
+      expect(list2.get(2)).toBe(2);
+    });
+  });
+
+  describe('remove Map', () => {
+    const map = new Map({ x: 'x', y: 'y', z: 'z' });
+    const map1 = methods.remove(map, 'x');
+    const map2 = methods.remove(map, 'y');
+    const map3 = methods.remove(map, 'z');
+
+    test('returns new map with correct size', () => {
+      expect(map1).toBeInstanceOf(Map);
+      expect(map2).toBeInstanceOf(Map);
+      expect(map3).toBeInstanceOf(Map);
+      expect(map1.size).toBe(2);
+      expect(map2.size).toBe(2);
+      expect(map3.size).toBe(2);
+    });
+
+    test('removes correct values', () => {
+      expect(map1.get('x')).toBe(undefined);
+      expect(map2.get('y')).toBe(undefined);
+      expect(map3.get('z')).toBe(undefined);
+    });
+  });
+
+  describe('removeIn', () => {
+    describe('List', () => {
+      const list = new List([1, 2, 3, { x: [3, 4, 5] }]);
+      const list1 = methods.removeIn(list, [3, 'x', 2]);
+      const list2 = methods.removeIn(list, [3, 'x', 0]);
+
+      test('returns new List with correct size', () => {
+        expect(list1).toBeInstanceOf(List);
+        expect(list1.size).toBe(4);
+        expect(list2).toBeInstanceOf(List);
+        expect(list2.size).toBe(4);
+      });
+
+      test('removed correct value', () => {
+        expect(methods.getIn(list, [3, 'x', 2])).toBe(5);
+        expect(methods.getIn(list, [3, 'x', 1])).toBe(4);
+        expect(methods.getIn(list, [3, 'x', 0])).toBe(3);
+        expect(methods.getIn(list1, [3, 'x', 2])).toBe(undefined);
+        expect(methods.getIn(list2, [3, 'x', 2])).toBe(undefined);
+        expect(methods.getIn(list2, [3, 'x', 1])).toBe(5);
+        expect(methods.getIn(list2, [3, 'x', 0])).toBe(4);
+      });
+    });
+
+    describe('Map', () => {
+      const map = new Map({ x: { y: new Map({ z: 'value', a: 'string' }) } });
+      const map1 = methods.removeIn(map, ['x', 'y', 'z']);
+      const map2 = methods.removeIn(map, ['x', 'y', 'a']);
+
+      test('returns new Map with correct size', () => {
+        expect(map1).toBeInstanceOf(Map);
+        expect(map2).toBeInstanceOf(Map);
+        expect(map1.size).toBe(1);
+        expect(map2.size).toBe(1);
+      });
+
+      test('removed correct values', () => {
+        expect(methods.getIn(map, ['x', 'y', 'z'])).toEqual('value');
+        expect(methods.getIn(map, ['x', 'y', 'a'])).toEqual('string');
+        expect(methods.getIn(map1, ['x', 'y', 'z'])).toBe(undefined);
+        expect(methods.getIn(map2, ['x', 'y', 'a'])).toBe(undefined);
+      });
+    });
+
+    describe('mixed Map and List', () => {
+      const list = new List([1, new Map({ x: new List([new Map({ z: 'value', y: 'string' })]) })]);
+      const list1 = methods.removeIn(list, [1, 'x', 0, 'z']);
+      const list2 = methods.removeIn(list, [1, 'x', 0, 'y']);
+
+      test('returns new List with correct size', () => {
+        expect(list1).toBeInstanceOf(List);
+        expect(list1.size).toBe(2);
+        expect(list2).toBeInstanceOf(List);
+        expect(list2.size).toBe(2);
+      });
+
+      test('removed correct value', () => {
+        expect(methods.getIn(list, [1, 'x', 0, 'z'])).toEqual('value');
+        expect(methods.getIn(list, [1, 'x', 0, 'y'])).toEqual('string');
+        expect(methods.getIn(list1, [1, 'x', 0, 'z'])).toBe(undefined);
+        expect(methods.getIn(list2, [1, 'x', 0, 'y'])).toBe(undefined);
+      });
+    });
+  });
+
+  describe('set', () => {
+    describe('List', () => {
+      const list = new List();
+      const list1 = methods.set(list, 0, 'value');
+      const list2 = methods.set(list, 0, new Map({ x: 'x' }));
+      const list3 = methods.set(list, 2, 100);
+
+      test('returns new List with correct size', () => {
+        expect(list).toBeInstanceOf(List);
+        expect(list1).toBeInstanceOf(List);
+        expect(list2).toBeInstanceOf(List);
+        expect(list3).toBeInstanceOf(List);
+        expect(list.size).toBe(0);
+        expect(list1.size).toBe(1);
+        expect(list2.size).toBe(1);
+        expect(list3.size).toBe(3);
+      });
+
+      test('set correct values', () => {
+        expect(list.get(0)).toBe(undefined);
+        expect(list1.get(0)).toEqual('value');
+        expect(list2.get(0)).toEqual(new Map({ x: 'x' }));
+        expect(list3.get(0)).toBe(undefined);
+        expect(list3.get(1)).toBe(undefined);
+        expect(list3.get(2)).toBe(100);
+      });
+    });
+
+    describe('Map', () => {
+      const map = new Map();
+      const map1 = methods.set(map, 'x', 'value');
+      const map2 = methods.set(map, 'y', new List([1]));
+      const map3 = methods.set(map, 'z', new Map({ x: 'y' }));
+    });
+  });
 });

@@ -14,7 +14,7 @@ const mergeDeep = (collection, ...sources) => {
 };
 
 const mergeMap = source => {
-  merged.constructor(source).reduce((entries, [key, value]) => {
+  new merged.constructor(source).reduce((entries, [key, value]) => {
     const hasVal = merged.has(key);
     if (!hasVal) {
       merged = merged.set(key, value);
@@ -25,7 +25,7 @@ const mergeMap = source => {
       merged = merged.set(key, mergedValue);
     }
     return entries;
-  }, merged.constructor(source));
+  }, new merged.constructor(source));
 };
 
 const mergeList = source => {
