@@ -41,7 +41,7 @@ class List {
   }
 
   reduce(fn, t) {
-    return this.tail ? this.tail.reduce(fn, t) : NOT_SET;
+    return this.tail ? this.tail.reduce(fn, t) : [];
   }
 }
 
