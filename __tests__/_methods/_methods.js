@@ -14,8 +14,8 @@ describe('_methods', () => {
     test('all properties of list are empty', () => {
       expect(list.altered).toBe(false);
       expect(list.size).toBe(0);
-      expect(list.tail).toBe(undefined);
-      expect(list._hashCode).toBe(undefined);
+      expect(list.tail).toBeUndefined();
+      expect(list._hashCode).toBeUndefined();
     });
   });
 
@@ -39,7 +39,7 @@ describe('_methods', () => {
       expect(one.get(1)).toBe(3);
       expect(two.get(2)).toBe(4);
       expect(three.get(3)).toBe(5);
-      expect(four.get(4)).toBe(undefined);
+      expect(four.get(4)).toBeUndefined();
     });
 
     test('adjust list size correctly', () => {
@@ -65,7 +65,7 @@ describe('_methods', () => {
       });
 
       test('returns notSetValue if value does not exist', () => {
-        expect(methods.get(list, 5)).toBe(undefined);
+        expect(methods.get(list, 5)).toBeUndefined();
         expect(methods.get(list, 5, 'value')).toBe('value');
       });
 
@@ -83,7 +83,7 @@ describe('_methods', () => {
       });
 
       test('returns notSetValue if value does not exist', () => {
-        expect(methods.get(map, 'z')).toBe(undefined);
+        expect(methods.get(map, 'z')).toBeUndefined();
         expect(methods.get(map, 'z', 'value')).toBe('value');
       });
 
@@ -104,7 +104,7 @@ describe('_methods', () => {
       });
 
       test('returns notSetValue if value does not exist', () => {
-        expect(methods.getIn(list, [0, 4])).toBe(undefined);
+        expect(methods.getIn(list, [0, 4])).toBeUndefined();
         expect(methods.getIn(list, [3, 2, 'z'], 'value')).toBe('value');
       });
     });
@@ -119,7 +119,7 @@ describe('_methods', () => {
       });
 
       test('returns notSetValue if value does not exist', () => {
-        expect(methods.getIn(map, ['y', 5, 'w'])).toBe(undefined);
+        expect(methods.getIn(map, ['y', 5, 'w'])).toBeUndefined();
         expect(methods.getIn(map, ['x', 3, 'z'], 'value')).toBe('value');
       });
     });
@@ -138,7 +138,7 @@ describe('_methods', () => {
       });
 
       test('returns notSetValue if value does not exist', () => {
-        expect(methods.getIn(mapList, ['map', 'b', 3])).toBe(undefined);
+        expect(methods.getIn(mapList, ['map', 'b', 3])).toBeUndefined();
         expect(methods.getIn(mapList, ['list', 4, 'list'], 'value')).toBe('value');
       });
     });
@@ -180,8 +180,8 @@ describe('_methods', () => {
       const list = new List([1, 2, 3]);
 
       test('hashCode adds _hashCode to Map or List', () => {
-        expect(map._hashCode).toBe(undefined);
-        expect(list._hashCode).toBe(undefined);
+        expect(map._hashCode).toBeUndefined();
+        expect(list._hashCode).toBeUndefined();
         hashCode.default(map);
         hashCode.default(list);
         expect(map._hashCode).toEqual(expect.any(Number));
@@ -668,10 +668,10 @@ describe('_methods', () => {
       expect(list.get(2)).toBe(3);
       expect(list.get(3)).toBe(4);
       expect(list.get(4)).toBe(5);
-      expect(list1.get(4)).toBe(undefined);
-      expect(list2.get(3)).toBe(undefined);
-      expect(list3.get(2)).toBe(undefined);
-      expect(list4.get(1)).toBe(undefined);
+      expect(list1.get(4)).toBeUndefined();
+      expect(list2.get(3)).toBeUndefined();
+      expect(list3.get(2)).toBeUndefined();
+      expect(list4.get(1)).toBeUndefined();
     });
   });
 
@@ -710,9 +710,9 @@ describe('_methods', () => {
     });
 
     test('removes correct values', () => {
-      expect(map1.get('x')).toBe(undefined);
-      expect(map2.get('y')).toBe(undefined);
-      expect(map3.get('z')).toBe(undefined);
+      expect(map1.get('x')).toBeUndefined();
+      expect(map2.get('y')).toBeUndefined();
+      expect(map3.get('z')).toBeUndefined();
     });
   });
 
@@ -733,8 +733,8 @@ describe('_methods', () => {
         expect(methods.getIn(list, [3, 'x', 2])).toBe(5);
         expect(methods.getIn(list, [3, 'x', 1])).toBe(4);
         expect(methods.getIn(list, [3, 'x', 0])).toBe(3);
-        expect(methods.getIn(list1, [3, 'x', 2])).toBe(undefined);
-        expect(methods.getIn(list2, [3, 'x', 2])).toBe(undefined);
+        expect(methods.getIn(list1, [3, 'x', 2])).toBeUndefined();
+        expect(methods.getIn(list2, [3, 'x', 2])).toBeUndefined();
         expect(methods.getIn(list2, [3, 'x', 1])).toBe(5);
         expect(methods.getIn(list2, [3, 'x', 0])).toBe(4);
       });
@@ -755,8 +755,8 @@ describe('_methods', () => {
       test('removed correct values', () => {
         expect(methods.getIn(map, ['x', 'y', 'z'])).toEqual('value');
         expect(methods.getIn(map, ['x', 'y', 'a'])).toEqual('string');
-        expect(methods.getIn(map1, ['x', 'y', 'z'])).toBe(undefined);
-        expect(methods.getIn(map2, ['x', 'y', 'a'])).toBe(undefined);
+        expect(methods.getIn(map1, ['x', 'y', 'z'])).toBeUndefined();
+        expect(methods.getIn(map2, ['x', 'y', 'a'])).toBeUndefined();
       });
     });
 
@@ -775,8 +775,8 @@ describe('_methods', () => {
       test('removed correct value', () => {
         expect(methods.getIn(list, [1, 'x', 0, 'z'])).toEqual('value');
         expect(methods.getIn(list, [1, 'x', 0, 'y'])).toEqual('string');
-        expect(methods.getIn(list1, [1, 'x', 0, 'z'])).toBe(undefined);
-        expect(methods.getIn(list2, [1, 'x', 0, 'y'])).toBe(undefined);
+        expect(methods.getIn(list1, [1, 'x', 0, 'z'])).toBeUndefined();
+        expect(methods.getIn(list2, [1, 'x', 0, 'y'])).toBeUndefined();
       });
     });
   });
@@ -800,11 +800,11 @@ describe('_methods', () => {
       });
 
       test('set correct values', () => {
-        expect(list.get(0)).toBe(undefined);
+        expect(list.get(0)).toBeUndefined();
         expect(list1.get(0)).toEqual('value');
         expect(list2.get(0)).toEqual(new Map({ x: 'x' }));
-        expect(list3.get(0)).toBe(undefined);
-        expect(list3.get(1)).toBe(undefined);
+        expect(list3.get(0)).toBeUndefined();
+        expect(list3.get(1)).toBeUndefined();
         expect(list3.get(2)).toBe(100);
       });
     });
@@ -827,11 +827,11 @@ describe('_methods', () => {
       });
 
       test('sets correct values', () => {
-        expect(map.get('x')).toBe(undefined);
+        expect(map.get('x')).toBeUndefined();
         expect(map1.get('x')).toEqual('value');
-        expect(map2.get('x')).toBe(undefined);
+        expect(map2.get('x')).toBeUndefined();
         expect(map2.get('y')).toEqual(new List([1]));
-        expect(map3.get('x')).toBe(undefined);
+        expect(map3.get('x')).toBeUndefined();
         expect(map3.get('y')).toEqual(new List([1]));
         expect(map3.get('z')).toEqual(new Map({ x: 'y' }));
       });
@@ -867,12 +867,12 @@ describe('_methods', () => {
       });
 
       test('has correct values', () => {
-        expect(obj.x).toBe(undefined);
+        expect(obj.x).toBeUndefined();
         expect(obj1.x).toEqual('value');
         expect(obj2.y).toEqual(new List([1]));
         expect(obj3.y).toEqual(new List([1]));
         expect(obj3.z).toEqual(new Map({ x: 'y' }));
-        expect(arr[0]).toBe(undefined);
+        expect(arr[0]).toBeUndefined();
         expect(arr1[0]).toEqual('key');
         expect(arr2[0]).toEqual(new List([1]));
         expect(arr3[0]).toEqual(new List([1]));
@@ -900,7 +900,7 @@ describe('_methods', () => {
       });
 
       test('sets correct values', () => {
-        expect(methods.getIn(map, ['x', 'y'])).toBe(undefined);
+        expect(methods.getIn(map, ['x', 'y'])).toBeUndefined();
         expect(methods.getIn(map1, ['x', 'y'])).toEqual('value');
         expect(methods.getIn(map2, ['y', 'x'])).toEqual(new List([1]));
         expect(methods.getIn(map3, ['y', 'x'])).toEqual(new List([1]));
@@ -926,7 +926,7 @@ describe('_methods', () => {
       });
 
       test('sets correct values', () => {
-        expect(methods.getIn(list, [0, 'x', 0])).toBe(undefined);
+        expect(methods.getIn(list, [0, 'x', 0])).toBeUndefined();
         expect(methods.getIn(list1, [0, 'x', 0])).toEqual('value');
         expect(methods.getIn(list2, [0, 'x'])).toEqual(new List([1]));
         expect(methods.getIn(list3, [0, 'x'])).toEqual(new List([1]));
@@ -964,12 +964,12 @@ describe('_methods', () => {
       });
 
       test('sets correct value', () => {
-        expect(methods.getIn(obj, ['x', 'y'])).toBe(undefined);
+        expect(methods.getIn(obj, ['x', 'y'])).toBeUndefined();
         expect(methods.getIn(obj1, ['x', 'y'])).toEqual('value');
         expect(methods.getIn(obj2, ['y', 'x'])).toEqual(new List([1]));
         expect(methods.getIn(obj3, ['y', 'x'])).toEqual(new List([1]));
         expect(methods.getIn(obj3, ['z', 'x'])).toEqual(new Map({ x: 'y' }));
-        expect(methods.getIn(arr, [0, 'y'])).toBe(undefined);
+        expect(methods.getIn(arr, [0, 'y'])).toBeUndefined();
         expect(methods.getIn(arr1, [0, 'y'])).toEqual('key');
         expect(methods.getIn(arr2, [0, 0])).toEqual(new List([1]));
         expect(methods.getIn(arr3, [0, 0])).toEqual(new List([1]));
@@ -1280,6 +1280,68 @@ describe('_methods', () => {
   });
 
   describe('updateIn', () => {
-    // desc
+    describe('Map', () => {
+      const map = new Map({ x: new Map({ y: new List([1, 2, new Map({ z: 'x' })]) }) });
+      // 3 arguments 3rd is updater
+      const map1 = methods.updateIn(map, ['x', 'y'], val => methods.push(val, 12));
+      const map2 = methods.updateIn(map, ['x', 'y', 2, 'z'], val => val + val);
+      // 4 arguments 3rd is notSetValue, 4th is updater
+      const map3 = methods.updateIn(map, ['y'], 'value', val => `new ${val}`);
+
+      test('returns new Map with correct size', () => {
+        expect(map).toBeInstanceOf(Map);
+        expect(map1).toBeInstanceOf(Map);
+        expect(map2).toBeInstanceOf(Map);
+        expect(map3).toBeInstanceOf(Map);
+        expect(map.size).toBe(1);
+        expect(map1.size).toBe(1);
+        expect(map2.size).toBe(1);
+        expect(map3.size).toBe(2);
+      });
+
+      test('3 arguments 3rd is updater', () => {
+        expect(methods.getIn(map, ['x', 'y', 3])).toBeUndefined();
+        expect(methods.getIn(map1, ['x', 'y', 3])).toBe(12);
+        expect(methods.getIn(map, ['x', 'y', 2, 'z'])).toEqual('x');
+        expect(methods.getIn(map2, ['x', 'y', 2, 'z'])).toEqual('xx');
+      });
+
+      test('4 args 3rd is notSet, 4th is updater', () => {
+        expect(map.get('y')).toBeUndefined();
+        expect(map3.get('y')).toEqual('new value');
+      });
+    });
+
+    describe('List', () => {
+      const list = new List([1, new Map({ y: new List([1, 2, new List([0, 1])]) })]);
+      // 3 arguments 3rd is updater
+      const list1 = methods.updateIn(list, [1, 'y'], val => methods.push(val, 12));
+      const list2 = methods.updateIn(list, [1, 'y', 2, 1], val => val + val);
+      // 4 arguments 3rd is notSetValue, 4th is updater
+      const list3 = methods.updateIn(list, [2], 'value', val => `new ${val}`);
+
+      test('returns new List with correct size', () => {
+        expect(list).toBeInstanceOf(List);
+        expect(list1).toBeInstanceOf(List);
+        expect(list2).toBeInstanceOf(List);
+        expect(list3).toBeInstanceOf(List);
+        expect(list.size).toBe(2);
+        expect(list1.size).toBe(2);
+        expect(list2.size).toBe(2);
+        expect(list3.size).toBe(3);
+      });
+
+      test('3 arguments 3rd is updater', () => {
+        expect(methods.getIn(list, [1, 'y', 3])).toBeUndefined();
+        expect(methods.getIn(list1, [1, 'y', 3])).toBe(12);
+        expect(methods.getIn(list, [1, 'y', 2, 1])).toEqual(1);
+        expect(methods.getIn(list2, [1, 'y', 2, 1])).toEqual(2);
+      });
+
+      test('4 args 3rd is notSet, 4th is updater', () => {
+        expect(list.get(2)).toBeUndefined();
+        expect(list3.get(2)).toEqual('new value');
+      });
+    });
   });
 });
