@@ -12,6 +12,7 @@ module.exports = {
         "implicit-arrow-linebreak": 0,
         "import/no-cycle": 1,
         "no-bitwise": 0,
+        "no-confusing-arrow": 0,
         "no-mixed-operators": 0,
         "no-nested-ternary": 1,
         "no-param-reassign": 0,

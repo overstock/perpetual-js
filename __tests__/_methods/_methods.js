@@ -298,11 +298,18 @@ describe('_methods', () => {
 
   describe('includes', () => {
     const list = new List([1, 'value', 3, 'apple', 5, 'string']);
+    const list1 = new List([]);
 
     test('returns true if value is included', () => {
       expect(methods.includes(list, 'value')).toBe(true);
       expect(methods.includes(list, 3)).toBe(true);
       expect(methods.includes(list, 'string')).toBe(true);
+    });
+
+    test('returns false if list is empty', () => {
+      expect(methods.includes(list1, 'value')).toBe(false);
+      expect(methods.includes(list1, 1)).toBe(false);
+      expect(methods.includes(list1, true)).toBe(false);
     });
 
     test('returns false if value does not exist', () => {

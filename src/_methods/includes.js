@@ -1,6 +1,6 @@
 const includes = (list, value) => {
-  const { tail: { array } } = list;
-  return array.indexOf(value) !== -1;
+  const { tail } = list;
+  return tail ? tail.array.indexOf(value) !== -1 : false;
 };
 
 export default includes;

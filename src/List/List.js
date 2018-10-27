@@ -65,7 +65,7 @@ class VNode {
 
   reduce(fn, t) {
     const { array } = this;
-    return Array.isArray(array) ? array.reduce(fn, t) : NOT_SET;
+    return Array.isArray(array) ? array.reduce(fn, t) : [];
   }
 }
 
