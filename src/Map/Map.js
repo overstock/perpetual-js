@@ -105,7 +105,7 @@ const makeMap = (size, root, hashCode) => {
 
 const createNewMap = value => {
   if (!isPlainObject(value)) {
-    throw new Error('expected value of type object or array');
+    throw new Error('expected value of type object');
   }
 
   const entries = objectToArray(value);

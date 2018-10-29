@@ -1,0 +1,402 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FromJS array and object to Perpetual collection of Map and List containing correct values 1`] = `
+List {
+  "_hashCode": undefined,
+  "altered": false,
+  "size": 5,
+  "tail": VNode {
+    "array": Array [
+      1,
+      2,
+      3,
+      Map {
+        "_hashCode": undefined,
+        "altered": false,
+        "root": ArrayMapNode {
+          "entries": Array [
+            Array [
+              "x",
+              "xyz",
+            ],
+            Array [
+              "y",
+              List {
+                "_hashCode": undefined,
+                "altered": false,
+                "size": 4,
+                "tail": VNode {
+                  "array": Array [
+                    1,
+                    2,
+                    3,
+                    List {
+                      "_hashCode": undefined,
+                      "altered": false,
+                      "size": 3,
+                      "tail": VNode {
+                        "array": Array [
+                          1,
+                          2,
+                          3,
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            Array [
+              "z",
+              Map {
+                "_hashCode": undefined,
+                "altered": false,
+                "root": ArrayMapNode {
+                  "entries": Array [
+                    Array [
+                      "a",
+                      "abc",
+                    ],
+                    Array [
+                      "b",
+                      Map {
+                        "_hashCode": undefined,
+                        "altered": false,
+                        "root": ArrayMapNode {
+                          "entries": Array [
+                            Array [
+                              "c",
+                              List {
+                                "_hashCode": undefined,
+                                "altered": false,
+                                "size": 4,
+                                "tail": VNode {
+                                  "array": Array [
+                                    1,
+                                    2,
+                                    3,
+                                    Map {
+                                      "_hashCode": undefined,
+                                      "altered": false,
+                                      "root": ArrayMapNode {
+                                        "entries": Array [
+                                          Array [
+                                            "d",
+                                            List {
+                                              "_hashCode": undefined,
+                                              "altered": false,
+                                              "size": 4,
+                                              "tail": VNode {
+                                                "array": Array [
+                                                  4,
+                                                  5,
+                                                  6,
+                                                  Map {
+                                                    "_hashCode": undefined,
+                                                    "altered": false,
+                                                    "root": ArrayMapNode {
+                                                      "entries": Array [
+                                                        Array [
+                                                          "e",
+                                                          List {
+                                                            "_hashCode": undefined,
+                                                            "altered": false,
+                                                            "size": 4,
+                                                            "tail": VNode {
+                                                              "array": Array [
+                                                                7,
+                                                                8,
+                                                                9,
+                                                                List {
+                                                                  "_hashCode": undefined,
+                                                                  "altered": false,
+                                                                  "size": 1,
+                                                                  "tail": VNode {
+                                                                    "array": Array [
+                                                                      0,
+                                                                    ],
+                                                                  },
+                                                                },
+                                                              ],
+                                                            },
+                                                          },
+                                                        ],
+                                                      ],
+                                                    },
+                                                    "size": 1,
+                                                  },
+                                                ],
+                                              },
+                                            },
+                                          ],
+                                        ],
+                                      },
+                                      "size": 1,
+                                    },
+                                  ],
+                                },
+                              },
+                            ],
+                          ],
+                        },
+                        "size": 1,
+                      },
+                    ],
+                  ],
+                },
+                "size": 2,
+              },
+            ],
+          ],
+        },
+        "size": 3,
+      },
+      List {
+        "_hashCode": undefined,
+        "altered": false,
+        "size": 3,
+        "tail": VNode {
+          "array": Array [
+            4,
+            5,
+            6,
+          ],
+        },
+      },
+    ],
+  },
+}
+`;
+
+exports[`FromJS array to List retuns list with all values 1`] = `
+List {
+  "_hashCode": undefined,
+  "altered": false,
+  "size": 4,
+  "tail": VNode {
+    "array": Array [
+      1,
+      2,
+      3,
+      List {
+        "_hashCode": undefined,
+        "altered": false,
+        "size": 4,
+        "tail": VNode {
+          "array": Array [
+            1,
+            2,
+            3,
+            List {
+              "_hashCode": undefined,
+              "altered": false,
+              "size": 4,
+              "tail": VNode {
+                "array": Array [
+                  1,
+                  2,
+                  3,
+                  List {
+                    "_hashCode": undefined,
+                    "altered": false,
+                    "size": 4,
+                    "tail": VNode {
+                      "array": Array [
+                        1,
+                        2,
+                        3,
+                        List {
+                          "_hashCode": undefined,
+                          "altered": false,
+                          "size": 4,
+                          "tail": VNode {
+                            "array": Array [
+                              1,
+                              2,
+                              3,
+                              List {
+                                "_hashCode": undefined,
+                                "altered": false,
+                                "size": 4,
+                                "tail": VNode {
+                                  "array": Array [
+                                    4,
+                                    5,
+                                    6,
+                                    List {
+                                      "_hashCode": undefined,
+                                      "altered": false,
+                                      "size": 4,
+                                      "tail": VNode {
+                                        "array": Array [
+                                          7,
+                                          8,
+                                          9,
+                                          List {
+                                            "_hashCode": undefined,
+                                            "altered": false,
+                                            "size": 1,
+                                            "tail": VNode {
+                                              "array": Array [
+                                                0,
+                                              ],
+                                            },
+                                          },
+                                        ],
+                                      },
+                                    },
+                                  ],
+                                },
+                              },
+                            ],
+                          },
+                        },
+                      ],
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    ],
+  },
+}
+`;
+
+exports[`FromJS object to map returns map with all values 1`] = `
+Map {
+  "_hashCode": undefined,
+  "altered": false,
+  "root": ArrayMapNode {
+    "entries": Array [
+      Array [
+        "x",
+        "xyz",
+      ],
+      Array [
+        "y",
+        Map {
+          "_hashCode": undefined,
+          "altered": false,
+          "root": ArrayMapNode {
+            "entries": Array [
+              Array [
+                "z",
+                "value",
+              ],
+              Array [
+                "x",
+                "string",
+              ],
+            ],
+          },
+          "size": 2,
+        },
+      ],
+      Array [
+        "z",
+        Map {
+          "_hashCode": undefined,
+          "altered": false,
+          "root": ArrayMapNode {
+            "entries": Array [
+              Array [
+                "a",
+                Map {
+                  "_hashCode": undefined,
+                  "altered": false,
+                  "root": ArrayMapNode {
+                    "entries": Array [
+                      Array [
+                        "b",
+                        "bc",
+                      ],
+                      Array [
+                        "c",
+                        Map {
+                          "_hashCode": undefined,
+                          "altered": false,
+                          "root": ArrayMapNode {
+                            "entries": Array [
+                              Array [
+                                "x",
+                                "y",
+                              ],
+                              Array [
+                                "z",
+                                "xyx",
+                              ],
+                              Array [
+                                "y",
+                                Map {
+                                  "_hashCode": undefined,
+                                  "altered": false,
+                                  "root": ArrayMapNode {
+                                    "entries": Array [
+                                      Array [
+                                        "a",
+                                        "abc",
+                                      ],
+                                      Array [
+                                        "c",
+                                        Map {
+                                          "_hashCode": undefined,
+                                          "altered": false,
+                                          "root": ArrayMapNode {
+                                            "entries": Array [
+                                              Array [
+                                                "d",
+                                                "dad",
+                                              ],
+                                              Array [
+                                                "m",
+                                                "mom",
+                                              ],
+                                              Array [
+                                                "g",
+                                                Map {
+                                                  "_hashCode": undefined,
+                                                  "altered": false,
+                                                  "root": ArrayMapNode {
+                                                    "entries": Array [
+                                                      Array [
+                                                        "x",
+                                                        "new",
+                                                      ],
+                                                    ],
+                                                  },
+                                                  "size": 1,
+                                                },
+                                              ],
+                                            ],
+                                          },
+                                          "size": 3,
+                                        },
+                                      ],
+                                    ],
+                                  },
+                                  "size": 2,
+                                },
+                              ],
+                            ],
+                          },
+                          "size": 3,
+                        },
+                      ],
+                    ],
+                  },
+                  "size": 2,
+                },
+              ],
+            ],
+          },
+          "size": 1,
+        },
+      ],
+    ],
+  },
+  "size": 3,
+}
+`;

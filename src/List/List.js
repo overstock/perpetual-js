@@ -1,7 +1,7 @@
 import { isList } from '../Perpetual';
 import { IS_LIST_SYMBOL } from '../Perpetual/isList';
 import {
-  SIZE, makeRef, setRef, NOT_SET,
+  SIZE, makeRef, setRef,
 } from '../_methods/utils/TrieUtils';
 import { freeze } from '../_methods/utils';
 
