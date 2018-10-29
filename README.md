@@ -2,6 +2,8 @@
 A light weight version of Immutable.js.
 This library comes in at 8kb minified and 3kb minified + gzipped.
 
+Because of efforts to keep bundle size small not all methods are included in Perpetual. Just the essential ones.
+
 ## Installation
 Install `perpetual-js` using npm or yarn.
 ```
@@ -139,7 +141,14 @@ deleteIn(keyPath: Iterable<array>): this
 
 Returns a new Map with values passed through a `reduce` function.
 ```typescript
-reduce<M>(reduceFunction: (accumulator: A, entry: [K, V]) => M): Map<K, M>
+reduce<R>(
+reducer: (reduction: R, value: [K, V], key: number, iter: this) => R,
+initialReduction: R,
+context?: any
+): R
+reduce<R>(
+reducer: (reduction: T | R, value: [K, V], key: number, iter: this) => R
+): R
 ```
 
 
@@ -177,6 +186,216 @@ updateIn(keyPath: Iterable<array>, updater: (value: any) => any): this
 ***withMutations()**
 
 Every time you call one of the above functions, a new immutable Map is created. If a pure function calls a number of these to produce a final return value, then a penalty on performance and memory has been paid by creating all of the intermediate immutable Maps.
+```typescript
+withMutations(mutator: (mutable: this) => any): this
+```
+
+
+
+### List
+***clear()**
+
+Returns a new List with 0 size and no values in constant time.
+```typescript
+clear(): List<T>
+```
+
+
+***concat()**
+
+Returns a new List with other values or collections concatenated to this one.
+```typescript
+concat<C>(...valuesOrCollections: Array<Iterable<C> | C>): List<T | C>
+```
+alias: merge
+
+
+***delete()**
+
+Returns a new List which excludes this `index` and with a size 1 less than this List. Values at indices above `index` are shifted down by 1 to fill the position.
+```typescript
+delete(index: number): List<T>
+```
+
+
+***deleteIn()**
+
+Returns a new List having removed the value at this keyPath. If any keys in keyPath do not exist, no change will occur.
+```typescript
+deleteIn(keyPath: Iterable<any>): this
+```
+
+
+***get()**
+
+Returns the value associated with the provided index, or notSetValue if the index is beyond the bounds of the Collection.
+```typescript
+get<NSV>(index: number, notSetValue: NSV): T | NSV
+get(index: number): T | undefined
+```
+
+
+***getIn()**
+
+Returns the value found by following a path of keys or indices through nested Collections.
+```typescript
+getIn(searchKeyPath: Iterable<any>, notSetValue?: any): any
+```
+
+
+***has()**
+
+True if a key exists within this Collection.
+```typescript
+has(key: number): boolean
+```
+
+
+***hashCode()**
+
+The hashCode() function is an important part of how Perpetual determines if two values are equivalent and is used to determine how to store those values.
+```typescript
+hashCode(): number
+```
+
+
+***includes()**
+
+True if a value exists within this Collection, using Immutable.is to determine equality
+```typescript
+includes(value: T): boolean
+```
+
+
+***insert()**
+
+Returns a new List with `value` at `index` with a size 1 more than this List. Values at indices above `index` are shifted over by 1.
+```typescript
+insert(index: number, value: T): List<T>
+```
+
+
+***mergeDeepIn()**
+
+A combination of updateIn and mergeDeep, returning a new Map, but performing the deep merge at a point arrived at by following the keyPath.
+```typescript
+mergeDeepIn(keyPath: Iterable<array>, ...collections: Array<any>): this
+```
+
+
+***mergeIn()**
+
+A combination of updateIn and merge, returning a new Map, but performing the merge at a point arrived at by following the keyPath.
+```typescript
+mergeIn(keyPath: Iterable<array>, ...collections: Array<any>): this
+```
+
+
+***pop()**
+
+Returns a new List with a size ones less than this List, excluding the last index in this List.
+```typescript
+pop(): List<T>
+```
+
+
+***push()**
+
+Returns a new List with the provided values appended, starting at this List's size.
+```typescript
+push(...values: Array<T>): List<T>
+```
+
+
+***set()**
+
+Returns a new List which includes `value` at `index`. If `index` already exists in this List, it will be replaced.
+```typescript
+set(index: number, value: T): List<T>
+```
+
+
+***setIn()**
+
+Returns a new List having set value at this `keyPath`. If any keys in `keyPath` do not exist, a new immutable Map will be created at that key.
+```typescript
+setIn(keyPath: Iterable<any>, value: any): this
+```
+
+
+***shift()**
+
+Returns a new List with a size ones less than this List, excluding the first index in this List, shifting all other values to a lower index.
+```typescript
+shift(): List<T>
+```
+
+
+***splice()**
+
+Splice returns a new indexed Collection by replacing a region of this Collection with new values. If values are not provided, it only skips the region to be removed.
+```typescript
+splice(index: number, removeNum: number, ...values: Array<T>): this
+```
+
+
+***reduce()**
+
+Reduces the Collection to a value by calling the reducer for every entry in the Collection and passing along the reduced value.
+```typescript
+reduce<R>(
+reducer: (reduction: R, value: T, key: number, iter: this) => R,
+initialReduction: R,
+context?: any
+): R
+reduce<R>(
+reducer: (reduction: T | R, value: T, key: number, iter: this) => R
+): R
+```
+
+
+***toJS()**
+
+Deeply converts this Indexed collection to equivalent native JavaScript Array.
+```typescript
+toJS(): Array<any>
+```
+
+
+***unshift()**
+
+Returns a new List with the provided values prepended, shifting other values ahead to higher indices.
+```typescript
+unshift(...values: Array<T>): List<T>
+```
+
+
+***update()**
+
+Returns a new List with an updated value at `index` with the return value of calling updater with the existing value, or `notSetValue` if `index` was not set. If called with a single argument, updater is called with the List itself.
+```typescript
+update(index: number, notSetValue: T, updater: (value: T) => T): this
+update(index: number, updater: (value: T) => T): this
+update<R>(updater: (value: this) => R): R
+```
+
+
+***updateIn()**
+
+Returns a new Map having applied the updater to the entry found at the keyPath.
+```typescript
+updateIn(
+keyPath: Iterable<array>,
+notSetValue: any,
+updater: (value: any) => any
+): this
+updateIn(keyPath: Iterable<array>, updater: (value: any) => any): this
+```
+
+
+***withMutations()**
+
+Every time you call one of the above functions, a new immutable List is created. If a pure function calls a number of these to produce a final return value, then a penalty on performance and memory has been paid by creating all of the intermediate immutable Lists.
 ```typescript
 withMutations(mutator: (mutable: this) => any): this
 ```
