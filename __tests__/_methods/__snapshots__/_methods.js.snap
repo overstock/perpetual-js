@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`_methods clear returns empty List 1`] = `
+List {
+  "_hashCode": undefined,
+  "altered": false,
+  "size": 0,
+  "tail": undefined,
+}
+`;
+
+exports[`_methods toJS List and Map returns obj with correct properties 1`] = `
+Object {
+  "x": Array [
+    1,
+    2,
+    3,
+    Object {
+      "y": Object {
+        "a": Object {
+          "z": Array [
+            1,
+            2,
+            3,
+          ],
+        },
+        "z": Array [
+          Object {
+            "x": "value",
+          },
+        ],
+      },
+    },
+    4,
+    5,
+    Array [
+      1,
+      2,
+      Array [
+        4,
+        5,
+        Object {},
+        Array [
+          1,
+          2,
+          Object {
+            "x": "x",
+          },
+        ],
+      ],
+    ],
+  ],
+  "y": Object {
+    "z": Array [
+      2,
+      Object {
+        "q": Array [],
+      },
+    ],
+  },
+}
+`;
+
+exports[`_methods toJS List returns arr with all correct properties 1`] = `
+Array [
+  1,
+  2,
+  Array [
+    1,
+    2,
+    Array [
+      1,
+      2,
+    ],
+    Array [
+      1,
+      Array [
+        1,
+      ],
+      3,
+    ],
+  ],
+]
+`;
+
+exports[`_methods toJS Map returns object with all correct properties 1`] = `
+Object {
+  "x": "x",
+  "y": Object {
+    "abc": "abc",
+  },
+  "z": Object {
+    "cba": Object {
+      "xyz": Object {
+        "xy": "xy",
+      },
+    },
+    "qwerty": Object {
+      "ytrewq": "ytrewq",
+    },
+  },
+}
+`;
