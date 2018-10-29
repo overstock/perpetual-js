@@ -173,3 +173,10 @@ updater: (value: any) => any
 updateIn(keyPath: Iterable<array>, updater: (value: any) => any): this
 ```
 
+
+***withMutations()**
+
+Every time you call one of the above functions, a new immutable Map is created. If a pure function calls a number of these to produce a final return value, then a penalty on performance and memory has been paid by creating all of the intermediate immutable Maps.
+```typescript
+withMutations(mutator: (mutable: this) => any): this
+```
