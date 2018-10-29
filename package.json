@@ -1,5 +1,5 @@
 {
-  "name": "perpetual",
+  "name": "perpetual-js",
   "version": "1.0.0",
   "description": "Lightweight version of immutable-js",
   "main": "src/index.js",
