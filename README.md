@@ -28,7 +28,7 @@ const list = List([1, 2, 3, 4])
 ```
 
 ### Map
-####get()
+**get()**
 Returns the value associated with the provided key, or notSetValue if the Collection does not contain this key.
 ```typescript
 get<NSV>(key: K, notSetValue: NSV): V | NSV
