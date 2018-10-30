@@ -1,6 +1,6 @@
 {
   "name": "perpetual-js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Lightweight version of immutable-js",
   "main": "index.js",
   "scripts": {
