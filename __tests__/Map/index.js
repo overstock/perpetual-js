@@ -1,4 +1,4 @@
-import Map from '../../src/Map';
+import Map from '../../Map';
 
 describe('Map index', () => {
   const map = Map();

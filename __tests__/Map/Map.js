@@ -1,5 +1,5 @@
-import * as Map from '../../src/Map/Map';
-import { NOT_SET } from '../../src/_methods/utils/TrieUtils';
+import * as Map from '../../Map/Map';
+import { NOT_SET } from '../../_methods/utils/TrieUtils';
 
 describe('Map', () => {
   describe('default', () => {

@@ -1,7 +1,7 @@
-import * as methods from '../../src/_methods';
-import * as hashCode from '../../src/_methods/hashCode';
-import List from '../../src/List/List';
-import Map from '../../src/Map/Map';
+import * as methods from '../../_methods';
+import * as hashCode from '../../_methods/hashCode';
+import List from '../../List/List';
+import Map from '../../Map/Map';
 
 describe('_methods', () => {
   describe('clear', () => {

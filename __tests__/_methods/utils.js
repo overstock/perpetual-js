@@ -1,7 +1,7 @@
-import * as utils from '../../src/_methods/utils';
-import * as trieUtils from '../../src/_methods/utils/TrieUtils';
-import Map from '../../src/Map';
-import List from '../../src/List';
+import * as utils from '../../_methods/utils';
+import * as trieUtils from '../../_methods/utils/TrieUtils';
+import Map from '../../Map';
+import List from '../../List';
 
 describe('utils', () => {
   test('arrCopy returns copy of array when passed arr', () => {

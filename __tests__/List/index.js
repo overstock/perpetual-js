@@ -1,4 +1,4 @@
-import List from '../../src/List';
+import List from '../../List';
 
 describe('index', () => {
   const list = List();
