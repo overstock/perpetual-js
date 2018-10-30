@@ -27,6 +27,18 @@ const map = Map({ value: 'value' })
 const list = List([1, 2, 3, 4])
 ```
 
+## fromJS()
+Deeply converts plain JS objects and arrays to Immutable Maps and Lists.
+```typescript
+fromJS(jsValue: any): any
+```
+
+## is()
+Value equality check with semantics similar to Object.is, but treats Immutable Collections as values, equal if the second Collection includes equivalent values.
+```typescript
+is(first: any, second: any): boolean
+```
+
 ## Map
 ***get()**
 
