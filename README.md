@@ -22,8 +22,6 @@ Perpetual comes with two different immutable collections: Map and List.
 
 ```jsx
 import { Map, List } from 'perpetual-js'
-import Map from 'perpetual-js/Map'
-import List from 'perpetual-js/List'
 
 const map = Map({ value: 'value' })
 const list = List([1, 2, 3, 4])
