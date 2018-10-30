@@ -1,6 +1,4 @@
-import FromJS from '../src/FromJS';
-import Map from '../src/Map';
-import List from '../src/List';
+import FromJS from '../FromJS';
 
 describe('FromJS', () => {
   describe('object to map', () => {

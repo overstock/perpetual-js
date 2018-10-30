@@ -1,6 +1,6 @@
-import * as Perpetual from '../../src/Perpetual';
-import List from '../../src/List';
-import Map from '../../src/Map';
+import * as Perpetual from '../../Perpetual';
+import List from '../../List';
+import Map from '../../Map';
 
 describe('Perpetual', () => {
   const str = 'xyz';

@@ -1,6 +1,6 @@
-import is from '../src/is';
-import Map from '../src/Map';
-import List from '../src/List';
+import is from '../is';
+import Map from '../Map';
+import List from '../List';
 
 describe('is', () => {
   test('if one or more values is missing or falsy returns false', () => {

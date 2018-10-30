@@ -1,5 +1,5 @@
-import * as List from '../../src/List/List';
-import { includes } from '../../src/_methods';
+import * as List from '../../List/List';
+import { includes } from '../../_methods';
 
 describe('List', () => {
   describe('List Class', () => {

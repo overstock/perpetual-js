@@ -1,3 +1,3 @@
-import * as Perpetual from '../src/index';
+import * as Perpetual from '..';
 
 global.Perpetual = Perpetual;
