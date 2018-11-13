@@ -155,6 +155,14 @@ Returns a new Map having set `value` at this `keyPath`. If any keys in `keyPath`
 setIn(keyPath: Iterable<array>, value: any): this
 ```
 
+**\*spread()**
+
+Returns an Object with the values provided to the spread method.
+
+```typescript
+spread(...keys: keyPath<array> | key<string>) : Object
+```
+
 **\*delete()**
 
 Returns a new Map which exludes this `key`.
@@ -382,6 +390,14 @@ Splice returns a new indexed Collection by replacing a region of this Collection
 
 ```typescript
 splice(index: number, removeNum: number, ...values: Array<T>): this
+```
+
+**\*spread()**
+
+Returns an Array with the values provided to the spread method.
+
+```typescript
+spread(...keys: keyPath<array> | key<string>) : Array
 ```
 
 **\*reduce()**
