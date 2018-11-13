@@ -2,6 +2,6 @@ const WebpackBundleAnalyzer = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 
 module.exports = () => ({
-  entry: './src/index.js',
+  entry: './index.js',
   plugins: [new WebpackBundleAnalyzer()],
 });
