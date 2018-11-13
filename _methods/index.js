@@ -7,6 +7,7 @@ export { default as hashCode } from './hashCode';
 export { default as hasIn } from './hasIn';
 export { default as includes } from './includes';
 export { default as insert } from './insert';
+export { default as map } from './map';
 export { default as merge } from './merge';
 export { default as mergeDeep } from './mergeDeep';
 export { default as mergeDeepIn } from './mergeDeepIn';
