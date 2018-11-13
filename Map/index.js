@@ -11,6 +11,7 @@ import {
   remove,
   removeIn,
   setIn,
+  spread,
   toJS,
   toMethod,
   update,
@@ -29,6 +30,7 @@ MapPrototype.mergeIn = toMethod(mergeIn);
 MapPrototype.delete = toMethod(remove);
 MapPrototype.deleteIn = toMethod(removeIn);
 MapPrototype.setIn = toMethod(setIn);
+MapPrototype.spread = toMethod(spread);
 MapPrototype.toJS = toMethod(toJS);
 MapPrototype.update = toMethod(update);
 MapPrototype.updateIn = toMethod(updateIn);
