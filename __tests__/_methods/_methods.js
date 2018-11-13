@@ -139,7 +139,9 @@ describe('_methods', () => {
 
       test('returns notSetValue if value does not exist', () => {
         expect(methods.getIn(mapList, ['map', 'b', 3])).toBeUndefined();
-        expect(methods.getIn(mapList, ['list', 4, 'list'], 'value')).toBe('value');
+        expect(methods.getIn(mapList, ['list', 4, 'list'], 'value')).toBe(
+          'value',
+        );
       });
     });
   });
@@ -277,9 +279,9 @@ describe('_methods', () => {
           x: 'y',
           z: {
             x: 'y',
-            z: 'a'
-          }
-        }
+            z: 'a',
+          },
+        },
       });
 
       test('returns true if map has nested value', () => {
@@ -344,6 +346,86 @@ describe('_methods', () => {
     });
   });
 
+  describe('map', () => {
+    describe('Map', () => {
+      const map = new Map({ x: 1, z: 'z', a: 5 });
+      const map1 = methods.map(map, x => x + x);
+      const map2 = methods.map(map, (x, y) => y + x);
+      const map3 = methods.map(map, (x, y) => x == y);
+
+      test('returns new map with correct size', () => {
+        expect(map).toBeInstanceOf(Map);
+        expect(map1).toBeInstanceOf(Map);
+        expect(map2).toBeInstanceOf(Map);
+        expect(map3).toBeInstanceOf(Map);
+        expect(map.size).toBe(3);
+        expect(map1.size).toBe(3);
+        expect(map2.size).toBe(3);
+        expect(map3.size).toBe(3);
+      });
+
+      test('adds value to itself map1', () => {
+        expect(map1.get('x')).toBe(2);
+        expect(map1.get('z')).toEqual('zz');
+        expect(map1.get('a')).toBe(10);
+      });
+
+      test('adds value to key, map2', () => {
+        expect(map2.get('x')).toEqual('x1');
+        expect(map2.get('z')).toEqual('zz');
+        expect(map2.get('a')).toEqual('a5');
+      });
+
+      test('returns true if value equals key', () => {
+        expect(map3.get('x')).toBeFalsy();
+        expect(map3.get('z')).toBeTruthy();
+        expect(map3.get('a')).toBeFalsy();
+      });
+    });
+
+    describe('List', () => {
+      const list = new List([0, 2, 2, 4, 4]);
+      const list1 = methods.map(list, x => x + x);
+      const list2 = methods.map(list, (x, y) => x + y);
+      const list3 = methods.map(list, (x, y) => x == y);
+
+      test('returns new list with correct size', () => {
+        expect(list).toBeInstanceOf(List);
+        expect(list1).toBeInstanceOf(List);
+        expect(list2).toBeInstanceOf(List);
+        expect(list3).toBeInstanceOf(List);
+        expect(list.size).toBe(5);
+        expect(list1.size).toBe(5);
+        expect(list2.size).toBe(5);
+        expect(list3.size).toBe(5);
+      });
+
+      test('adds value to itself list1', () => {
+        expect(list1.get(0)).toBe(0);
+        expect(list1.get(1)).toBe(4);
+        expect(list1.get(2)).toBe(4);
+        expect(list1.get(3)).toBe(8);
+        expect(list1.get(4)).toBe(8);
+      });
+
+      test('adds key to value list2', () => {
+        expect(list2.get(0)).toBe(0);
+        expect(list2.get(1)).toBe(3);
+        expect(list2.get(2)).toBe(4);
+        expect(list2.get(3)).toBe(7);
+        expect(list2.get(4)).toBe(8);
+      });
+
+      test('returns true if index equals value', () => {
+        expect(list3.get(0)).toBeTruthy();
+        expect(list3.get(1)).toBeFalsy();
+        expect(list3.get(2)).toBeTruthy();
+        expect(list3.get(3)).toBeFalsy();
+        expect(list3.get(4)).toBeTruthy();
+      });
+    });
+  });
+
   describe('merge', () => {
     describe('Map', () => {
       const map1 = new Map({ x: 'x', y: 'y', z: 'a' });
@@ -355,7 +437,14 @@ describe('_methods', () => {
       Map.prototype.withMutations = methods.withMutations;
 
       const newMap = methods.merge(map1, map2);
-      const mergedMap = methods.merge(map1, map2, mapObj, mapArr, mapList, mapMap);
+      const mergedMap = methods.merge(
+        map1,
+        map2,
+        mapObj,
+        mapArr,
+        mapList,
+        mapMap,
+      );
 
       test('returns new map with correct size', () => {
         expect(newMap).toBeInstanceOf(Map);
@@ -430,7 +519,14 @@ describe('_methods', () => {
       List.prototype.withMutations = methods.withMutations;
 
       const newList = methods.merge(list1, list2);
-      const mergedList = methods.merge(list1, list2, listObj, listArr, listMap, listList);
+      const mergedList = methods.merge(
+        list1,
+        list2,
+        listObj,
+        listArr,
+        listMap,
+        listList,
+      );
 
       test('returns new list with correct size', () => {
         expect(newList).toBeInstanceOf(List);
@@ -541,8 +637,15 @@ describe('_methods', () => {
   });
 
   describe('mergeDeep', () => {
-    const one = new Map({ a: new Map({ x: 10, y: 10 }), b: new Map({ x: 20, y: 50 }) });
-    const two = new Map({ a: new Map({ x: 2 }), b: new Map({ y: 5 }), c: new Map({ z: 3 }) });
+    const one = new Map({
+      a: new Map({ x: 10, y: 10 }),
+      b: new Map({ x: 20, y: 50 }),
+    });
+    const two = new Map({
+      a: new Map({ x: 2 }),
+      b: new Map({ y: 5 }),
+      c: new Map({ z: 3 }),
+    });
     Map.prototype.merge = methods.toMethod(methods.merge);
     const merged = methods.mergeDeep(one, two);
 
@@ -565,7 +668,7 @@ describe('_methods', () => {
     const three = new Map({
       a: { y: 44, z: 10 },
       b: new Map({ x: new Map({ a: 420 }) }),
-      c: new Map({ z: 3 })
+      c: new Map({ z: 3 }),
     });
     const mergedTwo = methods.mergeDeep(one, three);
 
@@ -599,12 +702,20 @@ describe('_methods', () => {
       });
 
       test('merges correct values', () => {
-        expect(methods.getIn(merged, [2, 'x', 1, 'y'])).toEqual([4, { z: 'value' }, 1, { z: 'string' }]);
+        expect(methods.getIn(merged, [2, 'x', 1, 'y'])).toEqual([
+          4,
+          { z: 'value' },
+          1,
+          { z: 'string' },
+        ]);
       });
     });
 
     describe('Map', () => {
-      const map1 = new Map({ x: [1, 2, new Map({ y: [{ z: 'value' }] })], b: 'b' });
+      const map1 = new Map({
+        x: [1, 2, new Map({ y: [{ z: 'value' }] })],
+        b: 'b',
+      });
       const map2 = new Map({ a: { abc: 'abc' } });
       const merged = methods.mergeDeepIn(map1, ['x', 2, 'y'], map2);
 
@@ -614,7 +725,10 @@ describe('_methods', () => {
       });
 
       test('merges correct values', () => {
-        expect(methods.getIn(merged, ['x', 2, 'y'])).toEqual([{ z: 'value' }, ['a', { abc: 'abc' }]]);
+        expect(methods.getIn(merged, ['x', 2, 'y'])).toEqual([
+          { z: 'value' },
+          ['a', { abc: 'abc' }],
+        ]);
       });
     });
   });
@@ -631,12 +745,20 @@ describe('_methods', () => {
       });
 
       test('merges correct values', () => {
-        expect(methods.getIn(merged, [2, 'x', 1, 'y'])).toEqual([4, { z: 'value' }, 1, { z: 'string' }]);
+        expect(methods.getIn(merged, [2, 'x', 1, 'y'])).toEqual([
+          4,
+          { z: 'value' },
+          1,
+          { z: 'string' },
+        ]);
       });
     });
 
     describe('Map', () => {
-      const map1 = new Map({ x: [1, 2, new Map({ y: [{ z: 'value' }] })], b: 'b' });
+      const map1 = new Map({
+        x: [1, 2, new Map({ y: [{ z: 'value' }] })],
+        b: 'b',
+      });
       const map2 = new Map({ a: { abc: 'abc' } });
       const merged = methods.mergeIn(map1, ['x', 2, 'y'], map2);
 
@@ -646,7 +768,10 @@ describe('_methods', () => {
       });
 
       test('merges correct values', () => {
-        expect(methods.getIn(merged, ['x', 2, 'y'])).toEqual([{ z: 'value' }, ['a', { abc: 'abc' }]]);
+        expect(methods.getIn(merged, ['x', 2, 'y'])).toEqual([
+          { z: 'value' },
+          ['a', { abc: 'abc' }],
+        ]);
       });
     });
   });
@@ -768,7 +893,10 @@ describe('_methods', () => {
     });
 
     describe('mixed Map and List', () => {
-      const list = new List([1, new Map({ x: new List([new Map({ z: 'value', y: 'string' })]) })]);
+      const list = new List([
+        1,
+        new Map({ x: new List([new Map({ z: 'value', y: 'string' })]) }),
+      ]);
       const list1 = methods.removeIn(list, [1, 'x', 0, 'z']);
       const list2 = methods.removeIn(list, [1, 'x', 0, 'y']);
 
@@ -911,7 +1039,9 @@ describe('_methods', () => {
         expect(methods.getIn(map1, ['x', 'y'])).toEqual('value');
         expect(methods.getIn(map2, ['y', 'x'])).toEqual(new List([1]));
         expect(methods.getIn(map3, ['y', 'x'])).toEqual(new List([1]));
-        expect(methods.getIn(map3, ['y', 'z', 'a'])).toEqual(new Map({ x: 'y' }));
+        expect(methods.getIn(map3, ['y', 'z', 'a'])).toEqual(
+          new Map({ x: 'y' }),
+        );
       });
     });
 
@@ -1013,9 +1143,21 @@ describe('_methods', () => {
   });
 
   describe('splice', () => {
-    const list = new List([1, 2, { x: 'y' }, [1], new Map({ x: 'y' }), new List([1, 2])]);
+    const list = new List([
+      1,
+      2,
+      { x: 'y' },
+      [1],
+      new Map({ x: 'y' }),
+      new List([1, 2]),
+    ]);
     // inserting
-    const list1 = methods.splice(list, 0/* index */, 0/* deleteCount */, 'value');
+    const list1 = methods.splice(
+      list,
+      0 /* index */,
+      0 /* deleteCount */,
+      'value',
+    );
     const list2 = methods.splice(list, 7, 0, 'value', 'string');
     // deleting
     const list3 = methods.splice(list, 0, 1, 'value');
@@ -1054,8 +1196,8 @@ describe('_methods', () => {
         y: new Map({ abc: 'abc' }),
         z: new Map({
           cba: new Map({ xyz: new Map({ xy: 'xy' }) }),
-          qwerty: new Map({ ytrewq: 'ytrewq' })
-        })
+          qwerty: new Map({ ytrewq: 'ytrewq' }),
+        }),
       });
 
       const toJSMap = methods.toJS(map);
@@ -1065,8 +1207,8 @@ describe('_methods', () => {
         y: { abc: 'abc' },
         z: {
           cba: { xyz: { xy: 'xy' } },
-          qwerty: { ytrewq: 'ytrewq' }
-        }
+          qwerty: { ytrewq: 'ytrewq' },
+        },
       };
 
       test('returns object with all correct properties', () => {
@@ -1080,18 +1222,14 @@ describe('_methods', () => {
 
     describe('List', () => {
       const list = new List([
-        1, 2, new List([
-          1, 2, new List([1, 2]), new List([1, new List([1]), 3])
-        ])
+        1,
+        2,
+        new List([1, 2, new List([1, 2]), new List([1, new List([1]), 3])]),
       ]);
 
       const toJSList = methods.toJS(list);
 
-      const arr = [
-        1, 2, [
-          1, 2, [1, 2], [1, [1], 3]
-        ]
-      ];
+      const arr = [1, 2, [1, 2, [1, 2], [1, [1], 3]]];
 
       test('returns arr with all correct properties', () => {
         expect(list).toBeInstanceOf(List);
@@ -1105,40 +1243,48 @@ describe('_methods', () => {
     describe('List and Map', () => {
       const collection = new Map({
         x: new List([
-          1, 2, 3, new Map({
+          1,
+          2,
+          3,
+          new Map({
             y: new Map({
               z: new List([new Map({ x: 'value' })]),
-              a: new Map({ z: new List([1, 2, 3]) })
-            })
-          }), 4, 5, new List([
-            1, 2, new List([
-              4, 5, new Map(), new List([1, 2, new Map({ x: 'x' })])
-            ])
-          ])
+              a: new Map({ z: new List([1, 2, 3]) }),
+            }),
+          }),
+          4,
+          5,
+          new List([
+            1,
+            2,
+            new List([4, 5, new Map(), new List([1, 2, new Map({ x: 'x' })])]),
+          ]),
         ]),
         y: new Map({
-          z: new List([2, new Map({ q: new List() })])
-        })
+          z: new List([2, new Map({ q: new List() })]),
+        }),
       });
 
       const toJSCollection = methods.toJS(collection);
 
       const jsCol = {
         x: [
-          1, 2, 3, {
+          1,
+          2,
+          3,
+          {
             y: {
               z: [{ x: 'value' }],
-              a: { z: [1, 2, 3] }
-            }
-          }, 4, 5, [
-            1, 2, [
-              4, 5, {}, [1, 2, { x: 'x' }]
-            ]
-          ]
+              a: { z: [1, 2, 3] },
+            },
+          },
+          4,
+          5,
+          [1, 2, [4, 5, {}, [1, 2, { x: 'x' }]]],
         ],
         y: {
-          z: [2, { q: [] }]
-        }
+          z: [2, { q: [] }],
+        },
       };
 
       test('returns obj with correct properties', () => {
@@ -1288,9 +1434,12 @@ describe('_methods', () => {
 
   describe('updateIn', () => {
     describe('Map', () => {
-      const map = new Map({ x: new Map({ y: new List([1, 2, new Map({ z: 'x' })]) }) });
+      const map = new Map({
+        x: new Map({ y: new List([1, 2, new Map({ z: 'x' })]) }),
+      });
       // 3 arguments 3rd is updater
-      const map1 = methods.updateIn(map, ['x', 'y'], val => methods.push(val, 12));
+      const map1 = methods.updateIn(map, ['x', 'y'], val =>
+        methods.push(val, 12),);
       const map2 = methods.updateIn(map, ['x', 'y', 2, 'z'], val => val + val);
       // 4 arguments 3rd is notSetValue, 4th is updater
       const map3 = methods.updateIn(map, ['y'], 'value', val => `new ${val}`);
@@ -1320,9 +1469,13 @@ describe('_methods', () => {
     });
 
     describe('List', () => {
-      const list = new List([1, new Map({ y: new List([1, 2, new List([0, 1])]) })]);
+      const list = new List([
+        1,
+        new Map({ y: new List([1, 2, new List([0, 1])]) }),
+      ]);
       // 3 arguments 3rd is updater
-      const list1 = methods.updateIn(list, [1, 'y'], val => methods.push(val, 12));
+      const list1 = methods.updateIn(list, [1, 'y'], val =>
+        methods.push(val, 12),);
       const list2 = methods.updateIn(list, [1, 'y', 2, 1], val => val + val);
       // 4 arguments 3rd is notSetValue, 4th is updater
       const list3 = methods.updateIn(list, [2], 'value', val => `new ${val}`);

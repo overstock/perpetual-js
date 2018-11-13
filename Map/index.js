@@ -3,6 +3,7 @@ import {
   getIn,
   hashCode,
   hasIn,
+  map,
   merge,
   mergeDeep,
   mergeDeepIn,
@@ -20,6 +21,7 @@ import {
 MapPrototype.getIn = toMethod(getIn);
 MapPrototype.hashCode = toMethod(hashCode);
 MapPrototype.hasIn = toMethod(hasIn);
+MapPrototype.map = toMethod(map);
 MapPrototype.merge = toMethod(merge);
 MapPrototype.mergeDeep = toMethod(mergeDeep);
 MapPrototype.mergeDeepIn = toMethod(mergeDeepIn);
