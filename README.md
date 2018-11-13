@@ -80,6 +80,13 @@ True if the result of following a path of keys or indices through nested Collect
 hasIn(searchKeyPath: Iterable<array>): boolean
 ```
 
+***map()**
+
+Returns a new Map with values passed through a mapper function.
+```typescript
+map<M>(mapper: (value: V, key: K, iter: this) => M, context?: any): Map<K, M>
+```
+
 
 ***merge()**
 
@@ -282,6 +289,13 @@ includes(value: T): boolean
 Returns a new List with `value` at `index` with a size 1 more than this List. Values at indices above `index` are shifted over by 1.
 ```typescript
 insert(index: number, value: T): List<T>
+```
+
+***map()**
+
+Returns a new List with values passed through a mapper function.
+```typescript
+map<M>(mapper: (value: T, key: number, iter: this) => M, context?: any): List<M>
 ```
 
 
