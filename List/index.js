@@ -16,6 +16,7 @@ import {
   setIn,
   shift,
   splice,
+  spread,
   toJS,
   toMethod,
   unshift,
@@ -41,6 +42,7 @@ ListPrototype.push = toMethod(push);
 ListPrototype.setIn = toMethod(setIn);
 ListPrototype.shift = toMethod(shift);
 ListPrototype.splice = toMethod(splice);
+ListPrototype.spread = toMethod(spread);
 ListPrototype.toJS = toMethod(toJS);
 ListPrototype.unshift = toMethod(unshift);
 ListPrototype.update = toMethod(update);
