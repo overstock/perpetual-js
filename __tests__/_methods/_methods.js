@@ -1160,9 +1160,11 @@ describe('_methods', () => {
     describe('Map', () => {
       const map = new Map({ x: 'xyz', a: 'abc', d: 'def' });
       const map1 = new Map({ fName: 'Kevin', lName: 'Jenson', talent: null });
+      const map2 = new Map({ q: 'xyz', z: { r: 'zba', y: 'yxz' }, y: { t: 'def' } });
       Map.prototype.getIn = methods.toMethod(methods.getIn);
       const { x, a, d } = methods.spread(map, 'x', 'a', ['d']);
       const { fName, talent } = methods.spread(map1, 'talent', 'fName');
+      const { q, r, y, t } = methods.spread(map2, 'q', ['z', 'r'], ['z', 'y'], ['y', 't']);
 
       test('returns correct values, map', () => {
         expect(x).toEqual('xyz');
@@ -1173,6 +1175,13 @@ describe('_methods', () => {
       test('returns correct values, map1', () => {
         expect(fName).toEqual('Kevin');
         expect(talent).toBeNull();
+      });
+
+      test('returns correct nested values', () => {
+        expect(q).toEqual('xyz');
+        expect(r).toEqual('zba');
+        expect(y).toEqual('yxz');
+        expect(t).toEqual('def');
       });
     });
 
