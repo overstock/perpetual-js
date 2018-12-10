@@ -11,7 +11,7 @@ const spread = (collection, ...args) => {
       initial,
       total,
       Array.isArray(arg)
-        ? { [key(arg[0])]: collection.getIn(arg) }
+        ? { [key(arg[arg.length - 1])]: collection.getIn(arg) }
         : { [key(arg)]: collection.getIn([arg]) },
     );
   }, initial);
